@@ -1,16 +1,16 @@
 .onAttach <- function(...) {
   if(length(ls(envir=globalenv())) > 0) {
     packageStartupMessage(
-      make_pretty("Hi! I see that you have some variables saved in your",
-      "workspace. To keep things running smoothly, I recommend you clean up",
-      "before starting swirl.", skip_after=TRUE),
-      make_pretty("Type ls() to see a list of the variables in your workspace.",
-      "Then, type rm(list=ls()) to clear your workspace.", skip_after=TRUE),
-      make_pretty("Type swirl() when you are ready to begin.", skip_after=TRUE)
+      make_pretty("¡Hola! Veo que tienes algunas variables guardadas en tu",
+      "espacio de trabajo. Para que las cosas vayan bien te recomiendo que lo",
+      "vacies antes de empezar swirl.", skip_after=TRUE),
+      make_pretty("Tipea ls() para ver una lista de las variables en tu espacio",
+      "de trabajo. Luego, tipea rm(list=ls()) para limpiarlo.", skip_after=TRUE),
+      make_pretty("Tipea swirl-spa() cuando estes listo para empezar.", skip_after=TRUE)
     )
   } else {
     packageStartupMessage(
-      make_pretty("Hi! Type swirl() when you are ready to begin.",
+      make_pretty("¡Hola! Tipea swirl-spa() cuando estes listo para empezar.",
                   skip_after=TRUE)
     )
   }

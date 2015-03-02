@@ -225,8 +225,8 @@ omnitest <- function(correctExpr=NULL, correctVal=NULL, strict=FALSE, eval_for_c
   if((isTRUE(valGood) || is.na(valGood)) && exprGood){
     return(TRUE)
   } else if (isTRUE(valGood) && !exprGood && !strict){
-      swirl_out("That's not the expression I expected but it works.")
-      swirl_out("I've executed the correct expression in case the result is needed in an upcoming question.")
+      swirl_out("Esa no es la expresión que esperaba pero funciona.")
+      swirl_out("He ejecutado para expresión correcta en el caso de que el resultado sea necesario para una pregunta subsiguiente.")
       eval(parse(text=correctExpr),globalenv())
       return(TRUE)
     } else {
@@ -327,7 +327,7 @@ var_is_a <- function(class, var_name) {
     if(is(e,"dev") && !results$passed)swirl_out(results$message)
     return(results$passed)
   } else {
-    if(is(e,"dev"))swirl_out(paste(var_name, "does not exist."))
+    if(is(e,"dev"))swirl_out(paste(var_name, "no existe."))
     return(FALSE)
   }
 }
@@ -407,12 +407,12 @@ expr_creates_var <- function(correctName=NULL){
   if(is.null(correctName)){
     results <- expectThat(length(delta), equals(1), 
                           label=paste(deparse(e$expr), 
-                                      "does not create a variable."))  
+                                      "no crea una variable."))  
   } else {
     results <- expectThat(names(delta), 
                           is_equivalent_to(correctName, label=correctName), 
                           label=paste(deparse(e$expr),
-                                      "does not create a variable named",
+                                      "no crea una variable llamada",
                                       correctName))
   }
   if(results$passed){
@@ -442,8 +442,8 @@ val_has_length <- function(len){
   e <- get("e", parent.frame())
   try(n <- as.integer(len), silent=TRUE)
   if(is.na(n)){
-    stop(message=paste("BUG: specified length", len,
-                                 "is not an integer."))
+    stop(message=paste("FALLO: la longitud especificada", len,
+                                 "no es un entero."))
   }
   results <- expectThat(length(e$val), equals(n, label=n), 
                         label=paste0("length(c(", toString(e$val), "))"))                                                   

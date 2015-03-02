@@ -184,7 +184,7 @@ runTest.swirl1cmd <- function(keyphrase,e){
     return(TRUE)
   } else  
     if (ans.is.correct && !call.is.correct){
-     swirl_out("That's not the expression I expected but it works.")
+     swirl_out("Esa no es la expresion que estaba esperando pero funciona.")
       #following line is temporary fix to create correct vars for future ques if needed
       eval(correct.expr,globalenv())
       return(TRUE)
@@ -266,12 +266,12 @@ runTest.creates_var <- function(keyphrase, e){
   if(is.na(correctName)){
     results <- expectThat(length(delta), equals(1), 
                           label=paste(deparse(e$expr), 
-                                      "does not create a variable."))
+                                      "no crea una variable."))
   } else {
     results <- expectThat(names(delta), 
                           is_equivalent_to(correctName, label=correctName), 
                           label=paste(deparse(e$expr),
-                                      "does not create a variable named",
+                                      "no crea una variable llamada",
                                       correctName))
   }
   if(results$passed){
@@ -326,7 +326,7 @@ runTest.in_range <- function(keyphrase, e){
   range <- try(eval(parse(text=paste0("c(", rightside(keyphrase), ")"))),
                silent=TRUE)
   if(!is.numeric(range)){
-    swirl_out(paste("The given range", rightside(keyphrase), "is not numeric."))
+    swirl_out(paste("El rango dado", rightside(keyphrase), "no es numérico."))
     return(FALSE)
   }
   results <- expectThat(e$var, 
@@ -356,8 +356,8 @@ runTest.expr_identical <- function(keyphrase, e){
 runTest.val_length <- function(keyphrase, e){
   try(n <- as.integer(rightside(keyphrase)), silent=TRUE)
   if(is.na(n)){
-    stop(message=paste("BUG: right side of", keyphrase,
-                                 "is not an integer."))
+    stop(message=paste("FALLO: el lado derecho de", keyphrase,
+                                 "no es un entero."))
   }
   results <- expectThat(length(e$val), equals(n, label=n), 
                         label=paste0("length(c(", toString(e$val), "))"))                                                   
@@ -412,7 +412,7 @@ swirlExpectation <- function(testthat_expectation){
     success_msg <- testthat_expectation$success_msg
   } else {
     failure_msg <- message <- testthat_expectation$message
-    success_msg <- "unknown"
+    success_msg <- "desconocido"
   }
   structure(
     list(
@@ -436,7 +436,7 @@ uses_func <- function(expected, label = NULL, ...){
     uses <- (is.call(expr) || is.expression(expr)) && 
       expected %in% flatten(expr)
     expectation(identical(uses, TRUE),
-                str_c("does not use ", label))
+                str_c("no usa ", label))
   }
 }
 
@@ -447,7 +447,7 @@ in_range <- function(range, label=NULL){
       isTRUE(number >= range[1]) && 
       isTRUE(number <= range[2])
     expectation(identical(isOK, TRUE), 
-                str_c("is not between ", range[1], " and ", range[2]))
+                str_c("no se encuentra entre ", range[1], " y ", range[2]))
   }
 }
 
