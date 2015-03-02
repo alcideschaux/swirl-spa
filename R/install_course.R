@@ -65,13 +65,13 @@ NULL
 install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   # Validate arguments
   if(!is.character(course_name)) {
-    stop("Argument 'course_name' must be surrounded by quotes (i.e. a character string)!")
+    stop("¡El argumento 'course_name' debe estar rodeado por comillas (i.e. un caracter en cadena)!")
   }
   if(!is.logical(dev)) {
-    stop("Argument 'dev' must be either TRUE or FALSE!")
+    stop("¡El argumento 'dev' debe ser o TRUE o FALS!")
   }
   if(!(mirror == "github" || mirror == "bitbucket")){
-    stop("Please enter a valid name for a mirror. ('github' or 'bitbucket')")
+    stop("Por favor ingresa un nombre valido para un espejo. ('github' o 'bitbucket')")
   }
   
   # make pathname from course_name
@@ -80,7 +80,7 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   # Construct url to the appropriate zip file
   if(dev) {
     if(mirror != "github"){
-      stop("To access swirl courses in development on Bitbucket go to https://bitbucket.org/swirldevmirror/swirl_misc")
+      stop("Para acceder a cursos swirl en desarrollo en Bitbucket dirigete a https://bitbucket.org/swirldevmirror/swirl_misc")
     }
     url <- "http://github.com/swirldev/swirl_misc/zipball/master"
   } else {
@@ -111,8 +111,8 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   
   # Check if course exists
   if(length(unzip_list) == 0) {
-    stop(paste0("Course '", course_name, "' not found in course repository! ",
-                "Make sure you've got the name exactly right, then try again."))
+    stop(paste0("¡El Curso '", course_name, "' no se encuentra en el repositorio de cursos! ",
+                "Asegurate que has escrito el nombre correctamente y luego intentalo de nuevo."))
   }
   
   # Extract
@@ -125,9 +125,9 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   dirs_to_copy <- list.files(top_dir, full.names=TRUE)
   if(file.copy(dirs_to_copy, file.path(system.file(package = "swirl"), "Courses"),
             recursive=TRUE)){
-    swirl_out("Course installed successfully!", skip_after=TRUE)
+    swirl_out("¡El Curso se ha instalado existosamente!", skip_after=TRUE)
   } else {
-    swirl_out("Course installation failed.", skip_after=TRUE)
+    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
   }
   
   # Delete unzipped directory
@@ -177,9 +177,9 @@ zip_course <- function(path, dest=NULL){
   zip_dir <- paste0(dest, "/", "swirl_zip_creator_TEMP")
   dir.create(zip_dir)
   if(file.copy(path, zip_dir, recursive=TRUE)){
-    swirl_out("Course directory was successfully zipped!", skip_after=TRUE)
+    swirl_out("¡El directorio del Curso ha sido existosamente comprimido!", skip_after=TRUE)
   } else {
-    swirl_out("Course installation failed.", skip_after=TRUE)
+    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
   
   # Change directory to folder to be zipped
@@ -213,9 +213,9 @@ uninstall_course <- function(course_name){
                     make_pathname(course_name))
   if(file.exists(path)){
     unlink(path, recursive=TRUE, force=TRUE)
-    message("Course uninstalled successfully!")
+    message("¡El Curso se ha desinstalado exitosamente!")
   } else {
-    stop("Course not found!")
+    stop("¡No se encontro el Curso!")
   }
   invisible()
 }
@@ -239,9 +239,9 @@ uninstall_all_courses <- function(){
   
   if(file.exists(path)){
     unlink(path, recursive=TRUE, force=TRUE)
-    message("All courses uninstalled successfully!")
+    message("¡Todos los cursos se han instalado exitosamente!")
   } else {
-    stop("No courses found!")
+    stop("¡No se han encontrado Cursos!")
   }
   
   dir.create(path, showWarnings = FALSE)
@@ -271,10 +271,10 @@ uninstall_all_courses <- function(){
 #' @family InstallCourses
 install_course_zip <- function(path, multi=FALSE, which_course=NULL){
   if(!is.logical(multi) || is.na(multi)) {
-    stop("Argument 'multi' must be either TRUE or FALSE.")
+    stop("El argumento 'multi' debe ser o TRUE o FALSE.")
   }
   if(!multi && !is.null(which_course)) {
-    stop("Argument 'which_course' should only be specified when argument 'multi' is TRUE.")
+    stop("El argumento 'which_course' se debe especificar unicamente cuando el argumento 'multi' es TRUE.")
   }
   if(multi){
     # Find list of files not in top level directory
@@ -295,15 +295,15 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
                    nomatch=-1)
       nomatch <- match_ind < 0
       if(any(nomatch)) {
-        stop("Course ", sQuote(which_course[nomatch][1]), " not in specified directory. Be careful, course names are case sensitive!")
+        stop("El Curso ", sQuote(which_course[nomatch][1]), " no se encuentra en el directorio especificado. ¡Ten cuidado, los nombres de cursos son sensibles a mayúsculas!")
       }
       dirs_to_copy <- dirs_to_copy[match_ind]
     }
     if(file.copy(dirs_to_copy, file.path(system.file(package = "swirl"),
                                       "Courses"), recursive=TRUE)){
-      swirl_out("Course installed successfully!", skip_after=TRUE)
+      swirl_out("¡Curso instalado exitosamente!", skip_after=TRUE)
     } else {
-      swirl_out("Course installation failed.", skip_after=TRUE)
+      swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
     }
     
     # Delete unzipped directory
@@ -341,15 +341,15 @@ install_course_directory <- function(path){
   
   # Check to make sure there are fewer than 1000 files in course directory
   if(length(garbage_result) > 1000){
-    stop("Course directory is too large to install")
+    stop("El directorio del Curso es muy grande para instalarse")
   }
   
   # Copy files
   if(file.copy(path, file.path(system.file(package = "swirl"), "Courses"),
             recursive=TRUE)){
-    swirl_out("Course installed successfully!", skip_after=TRUE)
+    swirl_out("¡Curso instalado exitosamente!", skip_after=TRUE)
   } else {
-    swirl_out("Course installation failed.", skip_after=TRUE)
+    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
   
   invisible()

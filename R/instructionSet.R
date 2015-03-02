@@ -45,9 +45,9 @@ waitUser.text_order_question <- function(current.row, e){
 
 
 waitUser.video <- function(current.row, e){
-  response <- readline("Yes or No? ")
-  if(tolower(response) %in% c("y", "yes")){
-    swirl_out("Type nxt() to continue")
+  response <- readline("¿Sí o No? ")
+  if(tolower(response) %in% c("s", "sí")){
+    swirl_out("Tipea nxt() para continuar")
     e$prompt <- TRUE
     e$playing <- TRUE
     browseURL(current.row[,"VideoLink"])
@@ -158,7 +158,7 @@ testResponse.default <- function(current.row, e){
   if(is.na(tests) || tests == ""){
     results <- is(e, "dev")
     if(!results){
-      stop("BUG: There are no tests for this question!")
+      stop("FALLO: ¡No hay pruebas para esta pregunta!")
     }
   } else {
     tests <- str_trim(unlist(strsplit(tests,";")))
@@ -180,7 +180,7 @@ testResponse.default <- function(current.row, e){
     if(length(e$snapshot)>0)xfer(as.environment(e$snapshot), globalenv())
     mes <- tryAgain()
     if(is(current.row, "cmd_question")) {
-      mes <- paste(mes, "Or, type info() for more options.")
+      mes <- paste(mes, "O, tipea info() para más opciones.")
     }
     swirl_out(mes)
     temp <- current.row[,"Hint"]

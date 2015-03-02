@@ -60,13 +60,13 @@ mainMenu.default <- function(e){
       if(length(coursesU)==0){
         suggestions <- yaml.load_file(file.path(courseDir(e), "suggested_courses.yaml"))
         choices <- sapply(suggestions, function(x)paste0(x$Course, ": ", x$Description))
-        swirl_out("To begin, you must install a course. I can install a",
-                  "course for you from the internet, or I can send you to a web page",
+        swirl_out("Para empezar, debes instalar un Curso. Puedo instalar un",
+                  "Curso para tí desde la Internet, o puedo enviarte a una página web",
                   "(https://github.com/swirldev/swirl_courses)",
-                  "which will provide course options and directions for", 
-                  "installing courses yourself.",
-                  "(If you are not connected to the internet, type 0 to exit.)")
-        choices <- c(choices, "Don't install anything for me. I'll do it myself.")
+                  "que te proveerá de opciones de Cursos e instrucciones para", 
+                  "instalar los Cursos por tu cuenta.",
+                  "(si no estás conectado a la Internet, tipea 0 para salir.)")
+        choices <- c(choices, "No instales nada por mí. Lo haré yo mismo.")
         choice <- select.list(choices, graphics=FALSE)
         n <- which(choice == choices)
         if(length(n) == 0)return(FALSE)
@@ -74,11 +74,11 @@ mainMenu.default <- function(e){
           repeat {
             temp <- try(eval(parse(text=suggestions[[n]]$Install)), silent=TRUE)
             if(is(temp, "try-error")){
-              swirl_out("Sorry, but I'm unable to fetch ", sQuote(choice),
-                        "right now. Are you sure you have an internet connection?",
-                        "If so, would you like to try again or visit",
-                        "the course repository for instructions on how to",
-                        "install a course manually? Type 0 to exit.")
+              swirl_out("Me disculpo, pero soy incapaz de obtener ", sQuote(choice),
+                        "ahora mismo. Estás seguro que tienes una coneción a Internet?",
+                        "Si es así, ¿quisieras intentarlo nuevamente o visitar",
+                        "el repositorio del Curso por instrucciones sobre cómo",
+                        "instalar un Curso manualmente? Tipea 0 para salir.")
               ch <- c("Try again!", 
                       "Send me to the course repository for manual installation.")
               resp <- select.list(ch, graphics=FALSE)
