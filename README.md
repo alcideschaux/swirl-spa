@@ -1,47 +1,42 @@
-# swirl
+# swirl (en español)
 
 [![Build Status](https://travis-ci.org/swirldev/swirl.png?branch=master)](https://travis-ci.org/swirldev/swirl)
 
-### [http://swirlstats.com](http://swirlstats.com)
+swirl es una plataforma para aprender (y enseñar) estadística y R simultánea e interactivamente. Para instalar el paquete original en inglés sigue las instrucciones dadas en el sitio web oficial de swirl en [http://swirlstats.com](http://swirlstats.com). Este repositorio contiene la versión en español de swirl, traducida por [Alcides Chaux](https://github.com/alcideschaux), a partir del repositorio original del paquete ubicado en [https://github.com/swirldev/swirl](https://github.com/swirldev/swirl). Las siguientes indicaciones toman como base lo incluido en el repositorio original.
 
-swirl is a platform for learning (and teaching) statistics and R simultaneously and interactively. It presents a choice of course lessons and interactively tutors a user through them. A user may be asked to watch a video, to answer a multiple-choice or fill-in-the-blanks question, or to enter a command in the R console precisely as if he or she were using R in practice. Emphasis is on the last, interacting with the R console. User responses are tested for correctness and hints are given if appropriate. Progress is automatically saved so that a user may quit at any time and later resume without losing work.
+swirl contiene una selección de lecciones de cursos e interactivamente entrena al usuario a través de las mismas. Se puede pedir a un usuario que vea un video, que responda una pregunta de opción múltiple o de completa los espacios en blanco, o ingresar un comando en la consola de R precisamente como si estuviese usando R en la práctica. Se pone el énfasis en lo último, el interactuar con la consola de R. Las respuestas de los usuarios son evaluadas para ver si son correctas y se brindan pistas de ser apropiado. El progreso se guarda automáticamente de modo a que un usuario puede salir en cualquier momento y reiniciar la lección más tarde sin perder el trabajo hecho.
 
-swirl leans heavily on exercising a student's use of the R console. A callback mechanism, suggested and first demonstrated for the purpose by Hadley Wickham, is used to capture student input and to provide immediate feedback relevant to the course material at hand.
+swirl depende mucho del ejercitamiento en el uso de la consola de R por parte del estudiante. Un mecanismo de retrollamada, sugerido y demostrado primero para tal propósito por Hadley Wickham, se utiliza para capturar la respuesta del estudiante y para proveer retroalimentación inmediata relevante para el material del curso a mano.
 
-[swirlify](https://github.com/swirldev/swirlify) is a separate R package that provides a comprehensive toolbox for swirl instructors. Content is authored in [YAML](http://en.wikipedia.org/wiki/YAML) using the handy tools described on the [instructors page](http://swirlstats.com/instructors.html) of our website.
-
-The program is initiated with `swirl()`. Functions which control swirl's behavior include `bye()` to quit, `skip()` to skip a question, `main()` to return to the main menu, `play()` to allow experimentation in the R console without interference from swirl, `nxt()` to resume interacting with swirl, and `info()` to display a help menu.
-
-
-## Installing swirl (from CRAN)
-
-The easiest way to install and run swirl is by typing the following from the R console:
-
-```
-install.packages("swirl")
-library(swirl)
-swirl()
-```
-
-As we continue adding new features and content, we will make new versions available on CRAN as appropriate (every 1-2 months, most likely).
-
-## Installing the latest development version (from GitHub)
-
-To access the most recent features and content, you can install and run the development version of swirl using the [devtools](https://github.com/hadley/devtools) package:
+## Instalando swirl (versión en español)
+Para instalar la versión en español de swirl debes instalar primero el paquete `devtools` desde CRAN. Inicia R/Rstudio y escribe lo siguiente en la consola de R:
 
 ```
 install.packages("devtools")
-devtools::install_github("swirldev/swirl")
-library(swirl)
-swirl()
+```
+Una vez instalado el paquete `devtools`debes cargarlo usando el comando:
+
+```
+library(devtools)
 ```
 
-## Contributing to swirl's development
+Una vez cargada la librería instala la versión en español de swirl contenida en este repositorio con el siguiente comando:
 
-If you'd like to get involved, please fork this repository and submit a pull request with your proposed changes. We're happy to chat if you have any questions about the source code.
+```
+install_github("alcideschaux/swirl-spa")
+```
 
-## Using swirl in the classroom
+Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `skip()` para saltarse una pregunta, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
 
-Instructors around the world are using swirl in their classrooms. We think this is awesome. If you're an instructor, please feel free to do the same -- free of charge. While your students may be paying to take your course or attend your institution, we simply ask that you don't charge people *directly* for the use of our software or instructional content.
+## Instalando cursos
+swirl en español puede correr todos los cursos que se encuentran disponibles en el repositorio oficial de swirl en [https://github.com/swirldev/swirl_courses#swirl-courses](https://github.com/swirldev/swirl_courses#swirl-courses). Adicionalmente, se pueden instalar los mismos cursos en español desde el repositorio del Dr. Alcides Chaux en [https://github.com/alcideschaux](https://github.com/alcideschaux). Los cursos en español disponibles son:
 
-If you are not sure about a particular use case, don't hesitate to send us an email at info@swirlstats.com.
+* **Programación en R**, disponible en [https://github.com/alcideschaux/Programacion_en_R](https://github.com/alcideschaux/Programacion_en_R).
+
+Se debe tener en cuenta que la lista de cursos en español seguirá creciendo con el tiempo, por lo que es conveniente visitar regularmente este repositorio.
+
+## Uso de los cursos
+Siguiendo la política establecida en el repositorio oficial de swirl, este programa (swirl en español) y todos los cursos traducidos al español pueden utilizarse libre y gratuitamente.
+
+## Reporte de errores
+Si encuentras algún error en el programa o alguno de los cursos por favor notificalo a [alcideschaux@uninorte.edu.py](mailto:alcideschaux@uninorte.edu.py).
