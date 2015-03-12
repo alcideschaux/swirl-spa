@@ -12,14 +12,14 @@ loadLesson <- function(e, ...)UseMethod("loadLesson")
 loadInstructions <- function(e, ...)UseMethod("loadInstructions")
 
 # Default course and lesson navigation logic
-# 
-# This method implements default course and lesson navigation logic, 
+#
+# This method implements default course and lesson navigation logic,
 # decoupling menu presentation from internal processing of user
 # selections. It relies on several methods for menu presentation,
 # namely welcome(e), housekeeping(e), inProgressMenu(e, lessons),
-# courseMenu(e, courses), and lessonMenu(e, lessons). Defaults 
+# courseMenu(e, courses), and lessonMenu(e, lessons). Defaults
 # are provided.
-# 
+#
 # @param e persistent environment accessible to the callback
 #'@importFrom yaml yaml.load_file
 mainMenu.default <- function(e){
@@ -52,10 +52,10 @@ mainMenu.default <- function(e){
       # Let user choose the course.
       coursesU <- dir(courseDir(e))
       # Eliminate empty directories
-      idx <- unlist(sapply(coursesU, 
+      idx <- unlist(sapply(coursesU,
                     function(x)length(dir(file.path(courseDir(e),x)))>0))
       coursesU <- coursesU[idx]
-      
+
       # If no courses are available, offer to install one
       if(length(coursesU)==0){
         suggestions <- yaml.load_file(file.path(courseDir(e), "suggested_courses.yaml"))
@@ -63,7 +63,7 @@ mainMenu.default <- function(e){
         swirl_out("Para empezar, debes instalar un Curso. Puedo instalar un",
                   "Curso para tí desde la Internet, o puedo enviarte a una página web",
                   "(https://github.com/swirldev/swirl_courses)",
-                  "que te proveerá de opciones de Cursos e instrucciones para", 
+                  "que te proveerá de opciones de Cursos e instrucciones para",
                   "instalar los Cursos por tu cuenta.",
                   "(si no estás conectado a la Internet, tipea 0 para salir.)")
         choices <- c(choices, "No instales nada por mí. Lo haré yo mismo.")
@@ -79,7 +79,7 @@ mainMenu.default <- function(e){
                         "Si es así, ¿quisieras intentarlo nuevamente o visitar",
                         "el repositorio del Curso por instrucciones sobre cómo",
                         "instalar un Curso manualmente? Tipea 0 para salir.")
-              ch <- c("Try again!", 
+              ch <- c("Try again!",
                       "Send me to the course repository for manual installation.")
               resp <- select.list(ch, graphics=FALSE)
               if(resp == "") return(FALSE)
@@ -94,7 +94,7 @@ mainMenu.default <- function(e){
           }
           coursesU <- dir(courseDir(e))
           # Eliminate empty directories
-          idx <- unlist(sapply(coursesU, 
+          idx <- unlist(sapply(coursesU,
                                function(x)length(dir(file.path(courseDir(e),x)))>0))
           coursesU <- coursesU[idx]
         } else {
@@ -126,7 +126,7 @@ mainMenu.default <- function(e){
         man_path <- file.path(course_dir, "MANIFEST")
         if(file.exists(man_path)) {
           manifest <- get_manifest(course_dir)
-          lessons <- order_lessons(current_order=lessons, 
+          lessons <- order_lessons(current_order=lessons,
                                    manifest_order=manifest)
         }
         # Clean up lesson names
@@ -152,20 +152,20 @@ mainMenu.default <- function(e){
       }
       # For sourcing files which construct figures etc
       e$path <- file.path(courseDir(e), courseU, lesson)
-      # If running in 'test' mode and starting partway through 
+      # If running in 'test' mode and starting partway through
       # lesson, then complete first part
       if(is(e, "test") && e$test_from > 1) {
         complete_part(e)
       }
-      
+
       # Remove temp lesson name and course name vars, which were surrogates
       # for csv attributes -- they've been attached via lesson() by now
       rm("temp_lesson_name", "temp_course_name", envir=e, inherits=FALSE)
-      
+
       # Initialize the progress bar
       e$pbar <- txtProgressBar(style=3)
       e$pbar_seq <- seq(0, 1, length=nrow(e$les))
-      
+
       # expr, val, ok, and vis should have been set by the callback.
       # The lesson's current row - could start after 1 if in 'test' mode
       if(is(e, 'test')) {
@@ -185,7 +185,7 @@ mainMenu.default <- function(e){
       # Set up paths and files to save user progress
       # Make file path from lesson info
       fname <- progressName(attr(e$les,"course_name"), attr(e$les,"lesson_name"))
-      # path to file 
+      # path to file
       e$progress <- file.path(e$udat, fname)
       # indicator that swirl is not reacting to console input
       e$playing <- FALSE
@@ -202,30 +202,30 @@ welcome.test <- function(e, ...){
 
 # Default version.
 welcome.default <- function(e, ...){
-  swirl_out("Welcome to swirl!")
-  swirl_out("Please sign in. If you've been here before, use the same name as you did then. If you are new, call yourself something unique.", skip_after=TRUE)
-  resp <- readline("What shall I call you? ")
+  swirl_out("Bienvenido a swirl!")
+  swirl_out("Por favor regístrate. Si has estado aquí antes, usa el mismo nombre que usaste entonces. Si es la primera vez, ponte un nombre único.", skip_after=TRUE)
+  resp <- readline("¿Cómo debo llamarte? ")
   while(str_detect(resp, '[[:punct:]]')) {
-    swirl_out("Please don't use any quotes or other punctuation in your name.",
+    swirl_out("Por favor no uses comillas u otros tipos de puntuaciones en tu nombre.",
               skip_after = TRUE)
-    resp <- readline("What shall I call you? ")
+    resp <- readline("¿Cómo debo llamarte? ")
   }
   return(resp)
 }
 
 # Presents preliminary information to a new user
-# 
+#
 # @param e persistent environment used here only for its class attribute
-# 
+#
 housekeeping.default <- function(e){
-  swirl_out(paste0("Thanks, ", e$usr,". Let's cover a few quick housekeeping items before we begin our first lesson. First of all, you should know that when you see '...', that means you should press Enter when you are done reading and ready to continue."))
-  readline("\n...  <-- That's your cue to press Enter to continue")
-  swirl_out("Also, when you see 'ANSWER:', the R prompt (>), or when you are asked to select from a list, that means it's your turn to enter a response, then press Enter to continue.")
-  select.list(c("Continue.", "Proceed.", "Let's get going!"),
-              title="\nSelect 1, 2, or 3 and press Enter", graphics=FALSE)
-  swirl_out("You can exit swirl and return to the R prompt (>) at any time by pressing the Esc key. If you are already at the prompt, type bye() to exit and save your progress. When you exit properly, you'll see a short message letting you know you've done so.")
+  swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera lección, cubramos rápidamente algunos puntos de quehaceres domésticos. Antes que nada, deberías saber que cuando veas '...', eso significa que debes presionar Enter cuando termines de leer y estés listo para continuar."))
+  readline("\n...  <-- Esta es tu señal para presionar Enter y continuar")
+  swirl_out("Además, cuando veas 'PREGUNTA:', la línea de comandos de R (>), o cuando se te pida que selecciones de una lista, eso significa que es tu turno de ingresar una respuesta, para luego presionar Enter y continuar.")
+  select.list(c("Continua.", "Procede.", "¡Vamos avanzando!"),
+              title="\nSelecciona 1, 2, o 3 y presiona Enter", graphics=FALSE)
+  swirl_out("Puedes salir de swirl y regresar a la línea de comandos de R (>) en cualquier momento presionando la tecla de escape (Esc). Si ya estás en la línea de comandos, tipea bye() para salir y guardar tu progreso. Cuando salgas apropiadamente, verás un mensaje corto haciéndote saber que lo has hecho.")
   info()
-  swirl_out("Let's get started!", skip_before=FALSE)
+  swirl_out("¡Vamos a empezar!", skip_before=FALSE)
   readline("\n...")
 }
 
@@ -233,8 +233,8 @@ housekeeping.test <- function(e){}
 
 # A stub. Eventually this should be a full menu
 inProgressMenu.default <- function(e, choices){
-  nada <- "No. Let me start something new."
-  swirl_out("Would you like to continue with one of these lessons?")
+  nada <- "No. Dejame empezar algo nuevo."
+  swirl_out("¿Te gustaría continuar con una de estas lecciones?")
   selection <- select.list(c(choices, nada), graphics=FALSE)
   # return a blank if the user rejects all choices
   if(identical(selection, nada))selection <- ""
@@ -247,9 +247,9 @@ inProgressMenu.test <- function(e, choices) {
 
 # A stub. Eventually this should be a full menu
 courseMenu.default <- function(e, choices){
-  repo_option <- "Take me to the swirl course repository!"
+  repo_option <- "¡Llévame al repositorio de cursos de swirl!"
   choices <- c(choices, repo = repo_option)
-  swirl_out("Please choose a course, or type 0 to exit swirl.")
+  swirl_out("Por favor elige un curso, o tipea 0 para salir de swirl.")
   return(select.list(choices, graphics=FALSE))
 }
 
@@ -259,7 +259,7 @@ courseMenu.test <- function(e, choices) {
 
 # A stub. Eventually this should be a full menu
 lessonMenu.default <- function(e, choices){
-  swirl_out("Please choose a lesson, or type 0 to return to course menu.")
+  swirl_out("Por favor escoge una lección, o tipea 0 para regresar al menú del curso.")
   return(select.list(choices, graphics=FALSE))
 }
 
@@ -292,10 +292,10 @@ loadLesson.default <- function(e, courseU, lesson){
   # load any custom tests, returning FALSE if they fail to load
   clearCustomTests()
   loadCustomTests(lesPath)
-  
+
   # Attached class to content based on file extension
   class(dataName) <- get_content_class(dataName)
-  
+
   # Parse content, returning object of class "lesson"
   return(parse_content(dataName, e))
 }
@@ -325,7 +325,7 @@ restoreUserProgress.default <- function(e, selection){
   # Restore figures which precede current row (Issue #44)
   idx <- 1:(e$row - 1)
   figs <- e$les[idx,"Figure"]
-  # Check for missing Figure column (Issue #47) and omit NA's 
+  # Check for missing Figure column (Issue #47) and omit NA's
   if(is.null(figs) || length(figs) == 0)return()
   figs <- figs[!is.na(figs)]
   figs <- file.path(e$path, figs)

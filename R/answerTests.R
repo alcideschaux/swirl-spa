@@ -1,22 +1,22 @@
 # Extensible testing
-# 
+#
 # If tests are to be identified by keyphrases, then keyphrases must somehow be
 # converted (i.e., parsed) to function calls. It is reasonable to anticipate
-# that new tests will arise with broad deployment and new course material. 
-# Thus it would be convenient if new tests and keyphrases could be added 
-# without the need to change core swirl source code. 
-# 
+# that new tests will arise with broad deployment and new course material.
+# Thus it would be convenient if new tests and keyphrases could be added
+# without the need to change core swirl source code.
+#
 # Tests themselves would be new functions or methods, hence are additional code
 # by nature. The problem is to extensibly parse keyphrases to function calls.
 # One possibility, illustrated below, is to give new tests themselves
 # primary responsibility for parsing their own keyphrases.
-# 
+#
 # The tests themselves are identified by the substrings before the "=".
 # Substrings after "=" are essentially arguments. To illustrate a possiblity
 # we'll have core code base its function call on the string prior to "=",
 # and leave the rest to tests themselves. It is doubtful this scheme would
 # be flexible enough in general.
-# 
+#
 # There are various ways to do it, but we'll use S3 methods because we're
 # using them for other things as well. We'll give the keyphrase a class
 # attribute corresponding to the substring prior to "=", and use the keyphrase
@@ -31,15 +31,15 @@ runTest.default <- function(...)return(FALSE)
 # Always returns TRUE, for development purposes.
 runTest.true <- function(...)return(TRUE)
 
-# Returns TRUE if e$expr is an assignment 
-# 
+# Returns TRUE if e$expr is an assignment
+#
 runTest.assign <- function(keyphrase, e) {
   identical(class(e$expr), "<-")
 }
 
 # Returns TRUE if the function to the right of = in the keyphrase has
 # been used in e$expr
-#  
+#
 runTest.useFunc <- function(keyphrase, e) {
   func <- rightside(keyphrase)
   (is.call(e$expr) || is.expression(e$expr)) &&
@@ -51,7 +51,7 @@ runTest.useFunc <- function(keyphrase, e) {
 # This is for single word answers
 runTest.word <- function(keyphrase, e) {
   correctVal <- str_trim(rightside(keyphrase))
-  identical(str_trim(as.character(e$val)), 
+  identical(str_trim(as.character(e$val)),
             str_trim(as.character(correctVal)))
 }
 # Returns TRUE if as.character(e$val) matches the string to the right
@@ -72,7 +72,7 @@ runTest.word_many <- function(keyphrase,e){
   identical(sort(correct_list), sort(e$val))
 }
 
-# Tests if the user has just created one new variable. If so, assigns 
+# Tests if the user has just created one new variable. If so, assigns
 # e$newVar its value and returns TRUE.
 runTest.newVar <- function(keyphrase, e){
   # TODO: Eventually make auto-detection of new variables an option.
@@ -93,7 +93,7 @@ runTest.newVar <- function(keyphrase, e){
   }
 }
 
-# Tests if the user has just created one new variable of correct name. If so, 
+# Tests if the user has just created one new variable of correct name. If so,
 # returns TRUE.
 # keyphrase: correctName=<correct name>
 runTest.correctName <- function(keyphrase, e){
@@ -117,7 +117,7 @@ runTest.correctName <- function(keyphrase, e){
  }
 
 # Tests the result of a computation such as mean(newVar) applied
-# to a specific variable created in a previous question. 
+# to a specific variable created in a previous question.
 runTest.result <- function(keyphrase, e){
   correct.expr <- parse(text=rightside(keyphrase))
   newVar <- e$newVar
@@ -158,13 +158,13 @@ runTest.newcmd <- function(keyphrase,e){
   callResults <- expectThat(as.expression(e$expr)[[1]],
                                 is_identical_to(correct.expr,label=deparse(correct.expr)),
                                 label=deparse(e$expr))
-    
+
  #   identical(as.expression(e$expr)[[1]], as.expression(correct.expr)[[1]])
   if(ansResults$passed && callResults$passed){
     return(TRUE)
-  } else  
+  } else
     if (ansResults$passed && !callResults$passed){
-      swirl_out("That's not the expression I expected but it works.")
+      swirl_out("Esa no es la expresión que estaba esperando pero funciona.")
       swirl_out(callResults$message)
       #todo
       #following line is temporary fix to create correct vars for future ques if needed
@@ -182,9 +182,9 @@ runTest.swirl1cmd <- function(keyphrase,e){
   call.is.correct <- identical(as.expression(e$expr)[[1]], as.expression(correct.expr)[[1]])
   if(ans.is.correct && call.is.correct){
     return(TRUE)
-  } else  
+  } else
     if (ans.is.correct && !call.is.correct){
-     swirl_out("Esa no es la expresion que estaba esperando pero funciona.")
+     swirl_out("Esa no es la expresión que estaba esperando pero funciona.")
       #following line is temporary fix to create correct vars for future ques if needed
       eval(correct.expr,globalenv())
       return(TRUE)
@@ -201,14 +201,14 @@ runTest.trick <- function(keyphrase,e){
  else{
    e$trick <- 1
    return(FALSE)
- } 
+ }
 }
 
 ## TESTS AND KEYPHRASES BASED ON PACKAGE TESTTHAT
 # These tests will print diagnostics in "dev" mode
 # but not in user (default) mode.
 
-# Returns TRUE if e$var or (if it exists) the given 
+# Returns TRUE if e$var or (if it exists) the given
 # global variable is of the given class
 # keyphrase: is_a=class or is_a=class,variable
 runTest.is_a <- function(keyphrase, e) {
@@ -232,7 +232,7 @@ runTest.is_a <- function(keyphrase, e) {
 runTest.uses_func <- function(keyphrase, e) {
   func <- rightside(keyphrase)
   results <- expectThat(e$expr,
-                        uses_func(func, label=func), 
+                        uses_func(func, label=func),
                         label=deparse(e$expr))
   if(is(e,"dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
@@ -244,8 +244,8 @@ runTest.uses_func <- function(keyphrase, e) {
 runTest.matches <- function(keyphrase, e) {
   correctVal <- tolower(str_trim(rightside(keyphrase)))
   userVal <- str_trim(as.character(e$val))
-  results <- expectThat(tolower(userVal), 
-                        matches(correctVal), 
+  results <- expectThat(tolower(userVal),
+                        matches(correctVal),
                         label=userVal)
   if(is(e,"dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
@@ -264,12 +264,12 @@ runTest.creates_var <- function(keyphrase, e){
   }
   correctName <- rightside(keyphrase)
   if(is.na(correctName)){
-    results <- expectThat(length(delta), equals(1), 
-                          label=paste(deparse(e$expr), 
+    results <- expectThat(length(delta), equals(1),
+                          label=paste(deparse(e$expr),
                                       "no crea una variable."))
   } else {
-    results <- expectThat(names(delta), 
-                          is_equivalent_to(correctName, label=correctName), 
+    results <- expectThat(names(delta),
+                          is_equivalent_to(correctName, label=correctName),
                           label=paste(deparse(e$expr),
                                       "no crea una variable llamada",
                                       correctName))
@@ -286,7 +286,7 @@ runTest.creates_var <- function(keyphrase, e){
 
 # Tests the result of a computation such as mean(newVar) applied
 # to a specific variable created in a previous question.
-# keyphrase: equals=correctExpression,variable 
+# keyphrase: equals=correctExpression,variable
 runTest.equals <- function(keyphrase, e){
   temp <- strsplit(rightside(keyphrase),",")[[1]]
   correctExprLabel <- temp[1]
@@ -294,9 +294,9 @@ runTest.equals <- function(keyphrase, e){
   correctExpr <- gsub(variable, paste0("e$",variable), correctExprLabel)
   correctAns <- safeEval(parse(text=correctExpr))
   if(length(correctAns) != 1)return(FALSE)
-  results <- expectThat(e$var, 
-                        equals(correctAns[[1]], 
-                               label=correctExprLabel), 
+  results <- expectThat(e$var,
+                        equals(correctAns[[1]],
+                               label=correctExprLabel),
                         label=deparse(e$expr))
   if(is(e, "dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
@@ -312,7 +312,7 @@ runTest.equivalent <- function(keyphrase,e) {
   results <- expectThat(userExpr,
                         is_equivalent_to(correctExpr,deparse(correctExpr)),
                         label=deparse(userExpr))
-                        
+
   if(is(e,"dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
 }
@@ -329,9 +329,9 @@ runTest.in_range <- function(keyphrase, e){
     swirl_out(paste("El rango dado", rightside(keyphrase), "no es numérico."))
     return(FALSE)
   }
-  results <- expectThat(e$var, 
-                        in_range(range, 
-                                 label=range), 
+  results <- expectThat(e$var,
+                        in_range(range,
+                                 label=range),
                         label=e$var)
   if(is(e, "dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
@@ -344,10 +344,10 @@ runTest.expr_identical <- function(keyphrase, e){
   correct <- parse(text=rightside(keyphrase))[[1]]
   expr <- e$expr
   if(is.expression(expr))expr <- expr[[1]]
-  results <- expectThat(expr, 
+  results <- expectThat(expr,
                         is_identical_to(correct, label=rightside(keyphrase)),
                         label=deparse(expr))
-  if( is(e, "dev") && !results$passed)swirl_out(results$message) 
+  if( is(e, "dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
 }
 
@@ -359,9 +359,9 @@ runTest.val_length <- function(keyphrase, e){
     stop(message=paste("FALLO: el lado derecho de", keyphrase,
                                  "no es un entero."))
   }
-  results <- expectThat(length(e$val), equals(n, label=n), 
-                        label=paste0("length(c(", toString(e$val), "))"))                                                   
-  if( is(e, "dev") && !results$passed)swirl_out(results$message) 
+  results <- expectThat(length(e$val), equals(n, label=n),
+                        label=paste0("length(c(", toString(e$val), "))"))
+  if( is(e, "dev") && !results$passed)swirl_out(results$message)
   return(results$passed)
 }
 
@@ -424,7 +424,7 @@ swirlExpectation <- function(testthat_expectation){
 }
 
 
-## CUSTOM EXPECTATIONS FOR ANSWER TESTS 
+## CUSTOM EXPECTATIONS FOR ANSWER TESTS
 
 uses_func <- function(expected, label = NULL, ...){
   if(is.null(label)){
@@ -433,7 +433,7 @@ uses_func <- function(expected, label = NULL, ...){
     label <- deparse(label)
   }
   function(expr){
-    uses <- (is.call(expr) || is.expression(expr)) && 
+    uses <- (is.call(expr) || is.expression(expr)) &&
       expected %in% flatten(expr)
     expectation(identical(uses, TRUE),
                 str_c("no usa ", label))
@@ -443,15 +443,10 @@ uses_func <- function(expected, label = NULL, ...){
 in_range <- function(range, label=NULL){
   range <- sort(range)
   function(number){
-    isOK <- is.numeric(number) && 
-      isTRUE(number >= range[1]) && 
+    isOK <- is.numeric(number) &&
+      isTRUE(number >= range[1]) &&
       isTRUE(number <= range[2])
-    expectation(identical(isOK, TRUE), 
+    expectation(identical(isOK, TRUE),
                 str_c("no se encuentra entre ", range[1], " y ", range[2]))
   }
 }
-
-
-
-
-
