@@ -14,7 +14,7 @@ praise <- function() {
                  "¡Sigue así y llegarás a destino!",
                  "Perseverancia, esa es la clave.",
                  "¡Excelente trabajo!",
-                 "¡Eres bastente bueno, amigo mío!",
+                 "¡Eres bastante bueno, amigo mío!",
                  "¡Tu dedicación es inspiradora!",
                  "¡Entendiste bien!",
                  "¡Así mismo es!",

@@ -64,8 +64,8 @@ mainMenu.default <- function(e){
                   "Curso desde la Internet, o puedo enviarte a una página web",
                   "(https://github.com/swirldev/swirl_courses)",
                   "que te proveerá de opciones de Cursos (en inglés) e instrucciones para",
-                  "instalar los Cursos por tu cuenta.",
-                  "(si no estás conectado a la Internet, tipea 0 para salir.)")
+                  "instalar los Cursos por tu cuenta",
+                  "(si no estás conectado a la Internet, tipea 0 para salir).")
         choices <- c(choices, "No instales nada por mí. Lo haré yo mismo.")
         choice <- select.list(choices, graphics=FALSE)
         n <- which(choice == choices)
