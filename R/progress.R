@@ -18,7 +18,7 @@ saveProgress.default <- function(e){
 delete_progress <- function(user){
   # Make sure user entered a user name
   if(nchar(user) < 1){
-    stop("Please enter a valid username.")
+    stop("Por favor ingresa un nombre de usuario válido.")
   }
 
   # Find path to user data
@@ -27,8 +27,8 @@ delete_progress <- function(user){
   # Delete all files within a user folder
   if(file.exists(path)){
     invisible(file.remove(list.files(path, full.names = TRUE), recursive = TRUE))
-    message(paste0("Deleted progress for user: ", user))
+    message(paste0("Se ha borrado el progreso del usuario: ", user))
   } else {
-    message(paste0("Could not find account for user: ", user))
+    message(paste0("No se ha encontrado la cuenta del usuario: ", user))
   }
 }

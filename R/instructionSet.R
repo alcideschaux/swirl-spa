@@ -29,17 +29,17 @@ waitUser.default <- function(current.row, e){
 }
 
 waitUser.text_question <- function(current.row, e){
-  e$val <- str_trim(unlist(strsplit(readline("ANSWER: "),",")))
+  e$val <- str_trim(unlist(strsplit(readline("RESPUESTA: "),",")))
   e$iptr <- 1 + e$iptr
 }
 
 waitUser.text_many_question <- function(current.row, e){
-  e$val <- str_trim(unlist(strsplit(readline("ANSWER: "),",")))
+  e$val <- str_trim(unlist(strsplit(readline("RESPUESTA: "),",")))
   e$iptr <- 1 + e$iptr
 }
 
 waitUser.text_order_question <- function(current.row, e){
-  e$val <- str_trim(unlist(strsplit(readline("ANSWER: "),",")))
+  e$val <- str_trim(unlist(strsplit(readline("RESPUESTA: "),",")))
   e$iptr <- 1 + e$iptr
 }
 

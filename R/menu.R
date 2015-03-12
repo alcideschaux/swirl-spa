@@ -60,10 +60,10 @@ mainMenu.default <- function(e){
       if(length(coursesU)==0){
         suggestions <- yaml.load_file(file.path(courseDir(e), "suggested_courses.yaml"))
         choices <- sapply(suggestions, function(x)paste0(x$Course, ": ", x$Description))
-        swirl_out("Para empezar, debes instalar un Curso. Puedo instalar un",
-                  "Curso para tí desde la Internet, o puedo enviarte a una página web",
+        swirl_out("Para empezar, debes instalar un Curso. Puedo instalarte un",
+                  "Curso desde la Internet, o puedo enviarte a una página web",
                   "(https://github.com/swirldev/swirl_courses)",
-                  "que te proveerá de opciones de Cursos e instrucciones para",
+                  "que te proveerá de opciones de Cursos (en inglés) e instrucciones para",
                   "instalar los Cursos por tu cuenta.",
                   "(si no estás conectado a la Internet, tipea 0 para salir.)")
         choices <- c(choices, "No instales nada por mí. Lo haré yo mismo.")
@@ -79,12 +79,12 @@ mainMenu.default <- function(e){
                         "Si es así, ¿quisieras intentarlo nuevamente o visitar",
                         "el repositorio del Curso por instrucciones sobre cómo",
                         "instalar un Curso manualmente? Tipea 0 para salir.")
-              ch <- c("Try again!",
-                      "Send me to the course repository for manual installation.")
+              ch <- c("¡Intenta de nuevo!",
+                      "Envíame al repositorio del curso para una instalación manual.")
               resp <- select.list(ch, graphics=FALSE)
               if(resp == "") return(FALSE)
               if(resp == ch[2]) {
-                swirl_out("OK. I'm opening the swirl course respository in your browser.")
+                swirl_out("OK. Estoy abriendo el repositorio de cursos swirl en tu navegador.")
                 browseURL("https://github.com/swirldev/swirl_courses")
                 return(FALSE)
               }
@@ -98,7 +98,7 @@ mainMenu.default <- function(e){
                                function(x)length(dir(file.path(courseDir(e),x)))>0))
           coursesU <- coursesU[idx]
         } else {
-          swirl_out("OK. I'm opening the swirl course respository in your browser.")
+          swirl_out("OK. Estoy abriendo el repositorio de cursos swirl en tu navegador.")
           browseURL("https://github.com/swirldev/swirl_courses")
           return(FALSE)
         }
@@ -109,7 +109,7 @@ mainMenu.default <- function(e){
       while(lesson == ""){
         course <- courseMenu(e, coursesR)
         if(!is.null(names(course)) && names(course)=="repo") {
-          swirl_out("OK. I'm opening the swirl courses web page in your browser.")
+          swirl_out("OK. Estoy abriendo el repositorio de cursos swirl en tu navegador.")
           browseURL("https://github.com/swirldev/swirl_courses")
           return(FALSE)
         }

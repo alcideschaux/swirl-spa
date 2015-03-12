@@ -14,7 +14,7 @@ get_corr_ans.cmd_question <- function(unit) {
   end_chunk <- grep("^```$", unit)
   
   if(length(beg_chunk) == 0 | length(end_chunk) == 0) {
-    stop("You forgot to specify the correct answer on a command question!")
+    stop("¡Olvidaste especificar la respuesta correcta en una pregunta de comando!")
   }
   
   # Capture everything in between (exclusive)
@@ -22,7 +22,7 @@ get_corr_ans.cmd_question <- function(unit) {
   
   # Check for comments
   if(any(grepl("#", corr_ans))) {
-    stop("No comments allowed in correct answer!")
+    stop("¡No se permiten comentarios en la respuesta correcta!")
   }
   # Return correct answer
   corr_ans
@@ -31,7 +31,7 @@ get_corr_ans.cmd_question <- function(unit) {
 get_corr_ans.mult_question <- function(unit) {
   corr_ans_ind <- grep("^_[1-9][.].+_$", unit)
   if(length(corr_ans_ind) == 0) {
-    stop("You forgot to specify the correct answer on a multiple choice question!")
+    stop("¡Olvidaste especificar la respuesta correcta en un examen de opción múltiple!")
   }
   gsub("^_[1-9][.]\\s|_$", "", unit[corr_ans_ind])
 }
@@ -48,7 +48,7 @@ get_ans_choices.mult_question <- function(unit) {
   # Find answer choices
   choice_ind <- grep("^_?[1-9][.]", unit)
   if(length(choice_ind) == 0) {
-    stop("You forgot to specify answer choices!")
+    stop("¡Olvidaste especificar opciones de respuestas!")
   }
   # Collapse answer choices
   collapse_choices(unit[choice_ind])
@@ -85,13 +85,13 @@ get_hint.default <- function(unit) {
 
 get_hint.cmd_question <- function(unit) {
   hint_ind <- grep("*** .hint", unit, fixed = TRUE) + 1
-  if(length(hint_ind) == 0) stop("You forgot to specify a hint!")
+  if(length(hint_ind) == 0) stop("¡Olvidate especificar una pista!")
   hint <- unit[hint_ind]
 }
 
 get_hint.mult_question <- function(unit) {
   hint_ind <- grep("*** .hint", unit, fixed = TRUE) + 1
-  if(length(hint_ind) == 0) stop("You forgot to specify a hint!")
+  if(length(hint_ind) == 0) stop("Olvidaste especificar una pista!")
   hint <- unit[hint_ind]
 }
 
@@ -105,7 +105,7 @@ get_fig_filename.default <- function(unit) {
 
 get_fig_filename.figure <- function(unit) {
   fig_ind <- grep("*** .figure", unit, fixed = TRUE) + 1
-  if(length(fig_ind) == 0) stop("You forgot to specify a figure filename!")
+  if(length(fig_ind) == 0) stop("¡Olvidaste especificar un nombre de archivo para la figura!")
   fig <- unit[fig_ind]
 }
 
@@ -117,7 +117,7 @@ get_fig_type.default <- function(unit) {
 
 get_fig_type.figure <- function(unit) {
   figtype_ind <- grep("*** .fig_type", unit, fixed = TRUE) + 1
-  if(length(figtype_ind) == 0) stop("You forgot to specify a figure type!")
+  if(length(figtype_ind) == 0) stop("¡Olvidaste especificar un tipo de figura!")
   figtype <- unit[figtype_ind]
 }
 
@@ -131,7 +131,7 @@ get_video_url.default <- function(unit) {
 
 get_video_url.video <- function(unit) {
   vid_ind <- grep("*** .video_url", unit, fixed = TRUE) + 1
-  if(length(vid_ind) == 0) stop("You forgot to specify a video URL!")
+  if(length(vid_ind) == 0) stop("¡Olvidaste especificar el URL de un video!")
   vid <- unit[vid_ind]
 }
 
@@ -195,7 +195,7 @@ get_unit_class <- function(unit) {
                      "mult_question",
                      "video",
                      "figure")
-  if(!cl %in% valid_classes) stop("Invalid unit class used!")
+  if(!cl %in% valid_classes) stop("¡Unidad de clase inválida usada!")
   cl
 }
 

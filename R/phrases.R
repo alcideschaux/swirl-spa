@@ -3,29 +3,29 @@ praise <- function() {
   swirl_is_fun <- getOption("swirl_is_fun")
   
   if(is.null(swirl_is_fun) || isTRUE(swirl_is_fun)) {
-    phrases <- c("You got it!",
-                 "Nice work!",
-                 "Keep up the great work!",
-                 "You are doing so well!",
-                 "All that hard work is paying off!",
-                 "You nailed it! Good job!",
-                 "You're the best!",
-                 "You are amazing!",
-                 "Keep working like that and you'll get there!",
-                 "Perseverance, that's the answer.",
-                 "Great job!",
-                 "You are quite good my friend!",
-                 "Your dedication is inspiring!",
-                 "You got it right!",
-                 "That's correct!",
-                 "You are really on a roll!",
-                 "Excellent job!",
-                 "All that practice is paying off!",
-                 "Excellent work!",
-                 "That's a job well done!",
-                 "That's the answer I was looking for.")
+    phrases <- c("¡Lo lograste!",
+                 "¡Buen trabajo!",
+                 "¡Sigue así!",
+                 "¡Vas muy bien!",
+                 "¡Todo el esfuerzo está dando frutos!",
+                 "¡Le diste!¡Buen trabajo!",
+                 "¡Eres el mejor!",
+                 "¡Eres fantástico!",
+                 "¡Sigue así y llegarás a destino!",
+                 "Perseverancia, esa es la clave.",
+                 "¡Excelente trabajo!",
+                 "¡Eres bastente bueno, amigo mío!",
+                 "¡Tu dedicación es inspiradora!",
+                 "¡Entendiste bien!",
+                 "¡Así mismo es!",
+                 "¡En serio te está yendo de maravillas!",
+                 "¡Excelente labor!",
+                 "¡Toda esa práctica está dando frutos!",
+                 "¡Excelente trabajo!",
+                 "¡Ese es un trabajo bien hecho!",
+                 "Esa es la respuesta que estaba buscando.")
   } else {
-    phrases <- "Correct!"
+    phrases <- "¡Correcto!"
   }
   sample(phrases, 1)
 }
@@ -35,22 +35,22 @@ tryAgain <- function() {
   swirl_is_fun <- getOption("swirl_is_fun")
   
   if(is.null(swirl_is_fun) || isTRUE(swirl_is_fun)) {
-    phrases <- c("Almost! Try again.",
-                 "You almost had it, but not quite. Try again.",
-                 "Give it another try.",
-                 "Not quite! Try again.",
-                 "Not exactly. Give it another go.",
-                 "That's not exactly what I'm looking for. Try again.",
-                 "Nice try, but that's not exactly what I was hoping for. Try again.",
-                 "Keep trying!",
-                 "That's not the answer I was looking for, but try again.",
-                 "Not quite right, but keep trying.",
-                 "You're close...I can feel it! Try it again.",
-                 "One more time. You can do it!",
-                 "Not quite, but you're learning! Try again.",
-                 "Try again. Getting it right on the first try is boring anyway!")
+    phrases <- c("¡Casi! Intenta otra vez.",
+                 "Casi lo conseguiste, pero no todavía. Intenta otra vez.",
+                 "Intenta una vez más.",
+                 "¡No está del todo bien! Intenta otra vez.",
+                 "No exactamente. Hazlo una vez más.",
+                 "Eso no es exactamente lo que estoy buscando. Intenta de nuevo.",
+                 "Buen intento, pero no es exactamente lo que estaba esperando. Intenta otra vez.",
+                 "¡Sigue intentando!",
+                 "Esa no es la respuesta que estaba buscando, pero prueba otra vez.",
+                 "No del todo correcto, pero sigue intentando.",
+                 "Estás cerca ... ¡Puedo sentirlo! Intenta otra vez.",
+                 "Una vez más. ¡Puedes hacerlo!",
+                 "No del todo bien, ¡pero estás aprendiendo! Try again.",
+                 "Intenta otra vez. ¡Hacerlo bien la primera vez es aburrido de todas maneras!")
   } else {
-    phrases <- "Incorrect. Please try again."
+    phrases <- "Incorrecto. Por favor intenta otra vez."
   }
   sample(phrases, 1)
 }
