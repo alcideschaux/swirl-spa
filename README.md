@@ -36,6 +36,14 @@ Si experimentas problemas instalando `swirl` en español desde este repositorio 
 
 ![Figura 1](Package_targz.png)
 
+Para la correcta instalación de `swirl` en español hace falta que tengas instalado el paquete `bitops`. Si no tienes este paquete (como es el caso habitual para usuarios de Microsoft Windows) debes instalarlo desde CRAN con el siguiente comando:
+
+```
+install.packages("bitops")
+```
+
+El paquete `bitops` debe instalarse antes de instalar `swirl`.
+
 ## Lanzando swirl
 Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `skip()` para saltarse una pregunta, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
 
