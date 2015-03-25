@@ -104,7 +104,7 @@ waitUser.cmd_question <- function(current.row, e){
 
 #' @importFrom tools file_path_sans_ext
 waitUser.script <- function(current.row, e){
-  # If this is the first attempt or the user wants to start over, 
+  # If this is the first attempt or the user wants to start over,
   # then create temp files so nothing gets overwritten
   if(e$attempts == 1 || isTRUE(e$reset)) {
     # Get original script name
@@ -113,7 +113,7 @@ waitUser.script <- function(current.row, e){
     orig_script_path <- file.path(e$path, "scripts", orig_script_name)
     # Path temp copy of original script
     e$script_temp_path <- file.path(tempdir(), orig_script_name)
-    
+
     # Original correct script name
     correct_script_name <- paste0(
       tools::file_path_sans_ext(orig_script_name), "-correct.R")
@@ -121,16 +121,16 @@ waitUser.script <- function(current.row, e){
     correct_script_path <- file.path(e$path, "scripts", correct_script_name)
     # Path of temp correct script
     e$correct_script_temp_path <- file.path(tempdir(), correct_script_name)
-    
+
     # Copy original script to temp file
     file.copy(orig_script_path, e$script_temp_path, overwrite = TRUE)
     # Copy original correct to temp correct
     file.copy(correct_script_path, e$correct_script_temp_path, overwrite = TRUE)
-    
+
     # Set reset flag back to FALSE
     e$reset <- FALSE
   }
-  # Have user edit the copy. This will reopen the file if 
+  # Have user edit the copy. This will reopen the file if
   # accidentally closed
   file.edit(e$script_temp_path)
   # Give instructions
@@ -180,7 +180,7 @@ testResponse.default <- function(current.row, e){
     if(length(e$snapshot)>0)xfer(as.environment(e$snapshot), globalenv())
     mes <- tryAgain()
     if(is(current.row, "cmd_question")) {
-      mes <- paste(mes, "O, tipea info() para más opciones.")
+      mes <- paste(mes, "O tipea info() para más opciones.")
     }
     swirl_out(mes)
     temp <- current.row[,"Hint"]
