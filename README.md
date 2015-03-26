@@ -15,20 +15,15 @@ Para instalar la versión en español de `swirl` debes instalar primero el paque
 ```
 install.packages("devtools")
 ```
-Una vez instalado el paquete `devtools`debes cargarlo usando el comando:
+Una vez instalado el paquete `devtools` instala la versión en español de swirl contenida en este repositorio con el siguiente comando:
 
 ```
-library(devtools)
+devtools::install_github("alcideschaux/swirl-spa")
 ```
 
-Una vez cargada la librería instala la versión en español de swirl contenida en este repositorio con el siguiente comando:
-
-```
-install_github("alcideschaux/swirl-spa")
-```
-
-### Desde un archivo local
+### Desde un archivo local usando RStudio
 Si experimentas problemas instalando `swirl` en español desde este repositorio de GitHub, puedes instalar el paquete desde un archivo local. Para hacer ésto sigue estos pasos:
+
 1. Baja el paquete haciendo click en [swirl-spa.tar.gz](https://github.com/alcideschaux/swirl-spa/blob/master/swirl-spa.tar.gz) y luego en "Raw".
 2. Lanza RStudio y accede al instalador de paquetes desde `Tools -> Install Packages...` (ver Figura).
 3. Despliega el menú de `Install from:` y selecciona para instalar desde `Package Archive File`. Ahí se abrirá una ventana en el navegador del sistema operativo. Selecciona el archivo que bajaste en el paso 1.
@@ -45,7 +40,7 @@ install.packages("bitops")
 El paquete `bitops` debe instalarse antes de instalar `swirl`.
 
 ## Lanzando swirl
-Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `skip()` para saltarse una pregunta, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
+Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
 
 ## Instalando cursos
 swirl en español puede correr todos los cursos que se encuentran disponibles en el repositorio oficial de swirl en [https://github.com/swirldev/swirl_courses#swirl-courses](https://github.com/swirldev/swirl_courses#swirl-courses). Adicionalmente, se pueden instalar los mismos cursos en español desde el repositorio del Dr. Alcides Chaux en [https://github.com/alcideschaux](https://github.com/alcideschaux). Los cursos en español disponibles son:
