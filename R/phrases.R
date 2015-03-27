@@ -1,7 +1,7 @@
 # Return random praise.
 praise <- function() {
   swirl_is_fun <- getOption("swirl_is_fun")
-  
+
   if(is.null(swirl_is_fun) || isTRUE(swirl_is_fun)) {
     phrases <- c("¡Lo lograste!",
                  "¡Buen trabajo!",
@@ -33,22 +33,22 @@ praise <- function() {
 # Return random "try again" message.
 tryAgain <- function() {
   swirl_is_fun <- getOption("swirl_is_fun")
-  
+
   if(is.null(swirl_is_fun) || isTRUE(swirl_is_fun)) {
-    phrases <- c("¡Casi! Intenta otra vez.",
+    phrases <- c("Casi! Intenta otra vez.",
                  "Casi lo conseguiste, pero no todavía. Intenta otra vez.",
                  "Intenta una vez más.",
-                 "¡No está del todo bien! Intenta otra vez.",
+                 "No está del todo bien! Intenta otra vez.",
                  "No exactamente. Hazlo una vez más.",
                  "Eso no es exactamente lo que estoy buscando. Intenta de nuevo.",
                  "Buen intento, pero no es exactamente lo que estaba esperando. Intenta otra vez.",
-                 "¡Sigue intentando!",
+                 "Sigue intentando!",
                  "Esa no es la respuesta que estaba buscando, pero prueba otra vez.",
                  "No del todo correcto, pero sigue intentando.",
-                 "Estás cerca ... ¡Puedo sentirlo! Intenta otra vez.",
-                 "Una vez más. ¡Puedes hacerlo!",
-                 "No del todo bien, ¡pero estás aprendiendo! Try again.",
-                 "Intenta otra vez. ¡Hacerlo bien la primera vez es aburrido de todas maneras!")
+                 "Estás cerca ... puedo sentirlo! Intenta otra vez.",
+                 "Una vez más. Puedes hacerlo!",
+                 "No del todo bien, pero estás aprendiendo! Prueba otra vez.",
+                 "Intenta otra vez. Hacerlo bien la primera vez es aburrido de todas maneras!")
   } else {
     phrases <- "Incorrecto. Por favor intenta otra vez."
   }

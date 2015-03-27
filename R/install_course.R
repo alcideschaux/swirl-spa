@@ -125,7 +125,7 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   dirs_to_copy <- list.files(top_dir, full.names=TRUE)
   if(file.copy(dirs_to_copy, file.path(system.file(package = "swirl"), "Courses"),
             recursive=TRUE)){
-    swirl_out("¡El Curso se ha instalado existosamente!", skip_after=TRUE)
+    swirl_out("El Curso se ha instalado existosamente!", skip_after=TRUE)
   } else {
     swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
@@ -213,7 +213,7 @@ uninstall_course <- function(course_name){
                     make_pathname(course_name))
   if(file.exists(path)){
     unlink(path, recursive=TRUE, force=TRUE)
-    message("¡El Curso se ha desinstalado exitosamente!")
+    message("El Curso se ha desinstalado exitosamente!")
   } else {
     stop("¡No se encontró el Curso!")
   }
@@ -239,7 +239,7 @@ uninstall_all_courses <- function(){
 
   if(file.exists(path)){
     unlink(path, recursive=TRUE, force=TRUE)
-    message("¡Todos los cursos se han instalado exitosamente!")
+    message("¡Todos los cursos se han desinstalado exitosamente!")
   } else {
     stop("¡No se han encontrado Cursos!")
   }
@@ -301,7 +301,7 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
     }
     if(file.copy(dirs_to_copy, file.path(system.file(package = "swirl"),
                                       "Courses"), recursive=TRUE)){
-      swirl_out("¡Curso instalado exitosamente!", skip_after=TRUE)
+      swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
     } else {
       swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
     }
@@ -347,7 +347,7 @@ install_course_directory <- function(path){
   # Copy files
   if(file.copy(path, file.path(system.file(package = "swirl"), "Courses"),
             recursive=TRUE)){
-    swirl_out("¡Curso instalado exitosamente!", skip_after=TRUE)
+    swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
   } else {
     swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }

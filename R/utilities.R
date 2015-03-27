@@ -122,13 +122,13 @@ loadDependencies <- function(lesson_dir) {
     packages_as_chars <- setdiff(readLines(depends, warn=FALSE), "")
     # If the dependson file is empty, then proceed with lesson
     if(length(packages_as_chars) == 0) return(TRUE)
-    swirl_out("Itentando cargar las dependencias de la lección ...")
+    swirl_out("Intentando cargar las dependencias de la lección ...")
     for(p in packages_as_chars) {
       p <- gsub("^\\s+|\\s+$", "", p) # trim leading and trailing whitespace
       if(suppressPackageStartupMessages(
         suppressWarnings(
           suppressMessages(require(p, character.only=TRUE, quietly=TRUE))))) {
-        swirl_out("¡Paquete", sQuote(p), "cargado correctamente!")
+        swirl_out("Paquete", sQuote(p), "cargado correctamente!")
       } else {
         swirl_out("Esta lección requiere el paquete", sQuote(p),
                   "¿Querrías que lo instale por tí ahora?")
@@ -141,7 +141,7 @@ loadDependencies <- function(lesson_dir) {
               suppressMessages(require(p,
                                        character.only=TRUE,
                                        quietly=TRUE))))) {
-            swirl_out("¡Paquete", sQuote(p), "instalado correctamente!")
+            swirl_out("Paquete", sQuote(p), "instalado correctamente!")
           } else {
             swirl_out("No se ha podido instalar el paquete", paste0(sQuote(p), "!"))
             return(FALSE)
