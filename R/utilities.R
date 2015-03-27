@@ -122,7 +122,7 @@ loadDependencies <- function(lesson_dir) {
     packages_as_chars <- setdiff(readLines(depends, warn=FALSE), "")
     # If the dependson file is empty, then proceed with lesson
     if(length(packages_as_chars) == 0) return(TRUE)
-    swirl_out("Intentando cargar las dependencias de la lección ...")
+    swirl_out("Intentando cargar las dependencias de la leccion ...")
     for(p in packages_as_chars) {
       p <- gsub("^\\s+|\\s+$", "", p) # trim leading and trailing whitespace
       if(suppressPackageStartupMessages(
@@ -130,10 +130,10 @@ loadDependencies <- function(lesson_dir) {
           suppressMessages(require(p, character.only=TRUE, quietly=TRUE))))) {
         swirl_out("Paquete", sQuote(p), "cargado correctamente!")
       } else {
-        swirl_out("Esta lección requiere el paquete", sQuote(p),
-                  "¿Querrías que lo instale por tí ahora?")
-        yn <- select.list(choices=c("Sí", "No"), graphics=FALSE)
-        if(yn == "Sí") {
+        swirl_out("Esta leccion requiere el paquete", sQuote(p),
+                  "Quieres que te lo instale ahora?")
+        yn <- select.list(choices=c("Si", "No"), graphics=FALSE)
+        if(yn == "Si") {
           swirl_out("Intentando instalar el paquete", sQuote(p), "ahora ...")
           install.packages(p, quiet=TRUE)
           if(suppressPackageStartupMessages(
@@ -175,11 +175,11 @@ complete_part <- function(e) {
       if(file.exists(correct_script_path)) {
         try(source(correct_script_path))
       } else {
-        stop("No se encontró el script correcto en ", correct_script_path)
+        stop("No se encontro el script correcto en ", correct_script_path)
       }
     }
   }
-  message("Completando la primera parte de la lección por tí ...\n")
+  message("Completando la primera parte de la leccion ...\n")
   apply(les, 1, exec_cmd)
   invisible()
 }

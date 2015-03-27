@@ -2,7 +2,7 @@
 
 #' Recursively expand both the correct expression and the user's expression and
 #' test for a match. CAUTION: May raise errors, as in rmatch_calls.
-#' 
+#'
 #' @export
 #' @param expr1 expression
 #' @param expr2 expression
@@ -11,7 +11,7 @@
 #' @return TRUE or FALSE according to whether expanded expressions match.
 #' @examples
 #' \dontrun{
-#'   
+#'
 #'   expr1 <- quote(print(paste("my_name_is", "mud")))
 #'   expr2 <- quote(print(paste("my_name_is", "mud", sep=" ")))
 #'   err <- try(ans <- is_robust_match(expr1, expr2, eval_for_class=TRUE), silent=TRUE)
@@ -26,16 +26,16 @@ is_robust_match <- function(expr1, expr2, eval_for_class, eval_env=NULL){
 }
 
 #' Recursively expand match calls in an expression from the bottom up.
-#' 
+#'
 #' Given an expression, expr, traverse the syntax tree from the
 #' bottom up, expanding the call to include default values of
 #' named formals as appropriate, and applying match.call to the result.
 #' Functionality is limited to expressions containing ordinary functions
 #' or S3 methods. If parameter eval_for_class has its default value of FALSE,
-#' an error will be raised for any S3 method whose first argument (as an expression) 
+#' an error will be raised for any S3 method whose first argument (as an expression)
 #' is not atomic. If eval_for_class is TRUE, the first argument will be evaluated
 #' to determine its class. Evaluation will take place in the environment given by
-#' parameter eval_env. 
+#' parameter eval_env.
 #' CAUTION: eval_for_class=TRUE is likely to result in multiple evaluations of the same code.
 #' Expressions containing S4 or reference class methods will also raise errors.
 #' @export
@@ -45,28 +45,28 @@ is_robust_match <- function(expr1, expr2, eval_for_class, eval_env=NULL){
 #' @return an equivalent R expression with function or method calls in canonical form.
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' # Function
 #' > rmatch_calls(quote(help("print")))
-#' help(topic = "print", package = NULL, lib.loc = NULL, verbose = getOption("verbose"), 
+#' help(topic = "print", package = NULL, lib.loc = NULL, verbose = getOption("verbose"),
 #' try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type"))
-#' 
+#'
 #' # S3 method with atomic first argument
 #' > rmatch_calls(quote(seq(0, 1, by=.5)))
 #' seq(from = 0, to = 1, by = 0.5, length.out = NULL, along.with = NULL)
-#' 
+#'
 #' # S3 method with non-atomic first argument, eval_for_class = FALSE (default)
 #' > rmatch_calls(quote(seq(as.Date("2014-02-01"), as.Date("2014-03-01"))))
-#' Error in rmatch_calls(quote(seq(as.Date("2014-02-01"), as.Date("2014-03-01")))) : 
-#'  Illegal expression, seq(as.Date(x = "2014-02-01"), as.Date(x = "2014-03-01")): 
-#'  The first argument, as.Date(x = "2014-02-01"), to S3 method 'seq', is a call, 
-#'  which (as an expression) is not atomic, hence its class can't be determined in an 
+#' Error in rmatch_calls(quote(seq(as.Date("2014-02-01"), as.Date("2014-03-01")))) :
+#'  Illegal expression, seq(as.Date(x = "2014-02-01"), as.Date(x = "2014-03-01")):
+#'  The first argument, as.Date(x = "2014-02-01"), to S3 method 'seq', is a call,
+#'  which (as an expression) is not atomic, hence its class can't be determined in an
 #'  abstract syntax tree without additional information.
-#'  
+#'
 #' # S3 method with non-atomic first argument, eval_for_class = TRUE
 #' > rmatch_calls(quote(seq(as.Date("2014-02-01"), as.Date("2014-03-01"))), eval_for_class=TRUE)
-#' seq(from = as.Date(x = "2014-02-01"), to = as.Date(x = "2014-03-01"), 
-#'     length.out = NULL, along.with = NULL)  
+#' seq(from = as.Date(x = "2014-02-01"), to = as.Date(x = "2014-03-01"),
+#'     length.out = NULL, along.with = NULL)
 #' }
 rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
   # If expr is not a call, just return it.
@@ -79,8 +79,8 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
   # would be likely to give a misleading result. Catch the error merely to
   # produce a better diagnostic.
   tryCatch(fct <- match.fun(expr[[1]]),
-           error=function(e)stop(paste0("Expresión ilegal ", dprs(expr), 
-                                        ": ", dprs(expr[[1]]), " no es una función.\n")))
+           error=function(e)stop(paste0("Expresion ilegal ", dprs(expr),
+                                        ": ", dprs(expr[[1]]), " no es una funcion.\n")))
   # If fct is a special function such as `$`, or builtin such as `+`, return expr.
   if(is.primitive(fct)){
     return(expr)
@@ -88,18 +88,18 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
   # If fct is an (S4) standardGeneric, match.call is likely to give a misleading result,
   # so raise an exception. (Note that builtins were handled earlier.)
   if(is(fct, "standardGeneric")){
-    stop(paste0("Expresión ilegal, ", dprs(expr), ": ", dprs(expr[[1]]), " es un standardGeneric.\n"))
+    stop(paste0("Expresion ilegal, ", dprs(expr), ": ", dprs(expr[[1]]), " es un standardGeneric.\n"))
   }
   # At this point, fct should be an ordinary function or an S3 method.
   if(isS3(fct)){
-    # If the S3 method's first argument, expr[[2]], is anything but atomic 
+    # If the S3 method's first argument, expr[[2]], is anything but atomic
     # its class can't be determined here without evaluation.
     if(!is.atomic(expr[[2]]) & !eval_for_class){
-      stop(paste0("Expresión ilegal, ", dprs(expr),": El primer argumento, ", dprs(expr[[2]]), 
-                  ", al método S3 '", dprs(expr[[1]]), 
-                  "', es una ", class(expr[[2]]) , ", la cual (como una expresión) no es atómica,",
-                  " por lo tanto su clase no puede ser determinada en un árbol",
-                  " sumario de sintaxis sin contar con información adicional.\n"))
+      stop(paste0("Expresion ilegal, ", dprs(expr),": El primer argumento, ", dprs(expr[[2]]),
+                  ", al metodo S3 '", dprs(expr[[1]]),
+                  "', es una ", class(expr[[2]]) , ", la cual (como una expresion) no es atomica,",
+                  " por lo tanto su clase no puede ser determinada en un arbol",
+                  " sumario de sintaxis sin contar con informacion adicional.\n"))
     }
     # Otherwise, attempt to find the appropriate method.
     if(is.null(eval_env)){
@@ -117,16 +117,16 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
     # raise an error
     if(is(err, "try-error")){
       tryCatch(fct <- getS3method(as.character(expr[[1]]), "default"),
-               error = function(e)stop(paste0("Expresión ilegal ", dprs(expr), ": ",
-                                              "No existe un método S3 emparejado o por defecto para el objecto, ",
+               error = function(e)stop(paste0("Expresion ilegal ", dprs(expr), ": ",
+                                              "No existe un metodo S3 emparejado o por defecto para el objecto, ",
                                               dprs(expr[[2]]), ", de clase, ", cls,".\n")))
     }
   }
   # Form preliminary match. If match.call raises an error here, the remaining code is
   # likely to give a misleading result. Catch the error merely to give a better diagnostic.
   tryCatch(expr <- match.call(fct, expr),
-           error = function(e)stop(paste0("Expresión ilegal ", dprs(expr), ": ", 
-                                          dprs(expr[[1]]), " no es una función.\n")))
+           error = function(e)stop(paste0("Expresion ilegal ", dprs(expr), ": ",
+                                          dprs(expr[[1]]), " no es una funcion.\n")))
   # Append named formals with default values which are not included
   # in the preliminary match
   fmls <- formals(fct)

@@ -65,10 +65,10 @@ NULL
 install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
   # Validate arguments
   if(!is.character(course_name)) {
-    stop("¡El argumento 'course_name' debe estar rodeado por comillas (i.e. un caracter en cadena)!")
+    stop("El argumento 'course_name' debe estar rodeado por comillas (i.e. un caracter en cadena)!")
   }
   if(!is.logical(dev)) {
-    stop("¡El argumento 'dev' debe ser o TRUE o FALSE!")
+    stop("El argumento 'dev' debe ser o TRUE o FALSE!")
   }
   if(!(mirror == "github" || mirror == "bitbucket")){
     stop("Por favor ingresa un nombre valido para un espejo. ('github' o 'bitbucket')")
@@ -111,8 +111,8 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
 
   # Check if course exists
   if(length(unzip_list) == 0) {
-    stop(paste0("¡El Curso '", course_name, "' no se encuentra en el repositorio de cursos! ",
-                "Asegúrate que has escrito el nombre correctamente y luego inténtalo de nuevo."))
+    stop(paste0("El Curso '", course_name, "' no se encuentra en el repositorio de cursos! ",
+                "Asegurate que has escrito el nombre correctamente y luego intentalo de nuevo."))
   }
 
   # Extract
@@ -127,7 +127,7 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
             recursive=TRUE)){
     swirl_out("El Curso se ha instalado existosamente!", skip_after=TRUE)
   } else {
-    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
   }
 
   # Delete unzipped directory
@@ -177,9 +177,9 @@ zip_course <- function(path, dest=NULL){
   zip_dir <- paste0(dest, "/", "swirl_zip_creator_TEMP")
   dir.create(zip_dir)
   if(file.copy(path, zip_dir, recursive=TRUE)){
-    swirl_out("¡El directorio del Curso ha sido existosamente comprimido!", skip_after=TRUE)
+    swirl_out("El directorio del Curso ha sido existosamente comprimido!", skip_after=TRUE)
   } else {
-    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
   }
 
   # Change directory to folder to be zipped
@@ -215,7 +215,7 @@ uninstall_course <- function(course_name){
     unlink(path, recursive=TRUE, force=TRUE)
     message("El Curso se ha desinstalado exitosamente!")
   } else {
-    stop("¡No se encontró el Curso!")
+    stop("No se encontro el Curso!")
   }
   invisible()
 }
@@ -239,9 +239,9 @@ uninstall_all_courses <- function(){
 
   if(file.exists(path)){
     unlink(path, recursive=TRUE, force=TRUE)
-    message("¡Todos los cursos se han desinstalado exitosamente!")
+    message("Todos los cursos se han desinstalado exitosamente!")
   } else {
-    stop("¡No se han encontrado Cursos!")
+    stop("No se han encontrado Cursos!")
   }
 
   dir.create(path, showWarnings = FALSE)
@@ -295,7 +295,7 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
                    nomatch=-1)
       nomatch <- match_ind < 0
       if(any(nomatch)) {
-        stop("El Curso ", sQuote(which_course[nomatch][1]), " no se encuentra en el directorio especificado. ¡Ten cuidado, los nombres de cursos son sensibles a mayúsculas!")
+        stop("El Curso ", sQuote(which_course[nomatch][1]), " no se encuentra en el directorio especificado. Ten cuidado, los nombres de cursos son sensibles a mayusculas!")
       }
       dirs_to_copy <- dirs_to_copy[match_ind]
     }
@@ -303,7 +303,7 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
                                       "Courses"), recursive=TRUE)){
       swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
     } else {
-      swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
+      swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
     }
 
     # Delete unzipped directory
@@ -349,7 +349,7 @@ install_course_directory <- function(path){
             recursive=TRUE)){
     swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
   } else {
-    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
   }
 
   invisible()
