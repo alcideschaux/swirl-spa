@@ -8,7 +8,7 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   message(mes)
 }
 
-# Takes a plain English name and turns it into a more proper 
+# Takes a plain English name and turns it into a more proper
 # file or directory name
 make_pathname <- function(name) {
   gsub(" ", "_", str_trim(name))
@@ -37,12 +37,12 @@ mergeLists <- function(sourceList, destList){
 }
 
 # Evaluates a user's expression in a clean environment
-# whose parent is a snapshot of the previous official 
+# whose parent is a snapshot of the previous official
 # environment, i.e., the same environment in which
 # the user entered the expression. Any values required
 # for evaluation will be found in the snapshot. Any variables
-# changed or created by the expression will appear in the 
-# clean environment, even if nothing changes in the global. 
+# changed or created by the expression will appear in the
+# clean environment, even if nothing changes in the global.
 #
 # For example, if x already has the value c(1, 2, 3) and
 # the user enters x <- c(1, 2, 3), nothing will change
@@ -52,7 +52,7 @@ mergeLists <- function(sourceList, destList){
 # In case the user's expression involves random numbers, the
 # values of variables which appear in the clean environment
 # are copied from the global environment.
-# 
+#
 # For example, if the user enters x <- rnorm(100), then
 # evaluating the expression in a clean environment will create
 # a variable named x, but it will have a different value
@@ -78,18 +78,18 @@ safeEval <- function(expr, e){
 # same parent as the global environment, which will
 # consist of loaded namespaces and packages.
 #
-# Environments in R are subject to reference semantics, 
-# i.e., all references refer to the same copy. Hence, 
-# the state of an environment cannot be saved for later 
-# comparison merely by creating a second reference. Any 
-# change in the environment will affect all references. 
-# Lists, however, have R's usual copy-on-modify semantics. 
-# If snapshot <- as.list(globalenv()), a subsequent change 
-# in the global environment will not cause a change in 
+# Environments in R are subject to reference semantics,
+# i.e., all references refer to the same copy. Hence,
+# the state of an environment cannot be saved for later
+# comparison merely by creating a second reference. Any
+# change in the environment will affect all references.
+# Lists, however, have R's usual copy-on-modify semantics.
+# If snapshot <- as.list(globalenv()), a subsequent change
+# in the global environment will not cause a change in
 # the list (with the exotic exception of environments
 # contained in the global environment.)
-# 
-# Clean environments can be used to detect variables 
+#
+# Clean environments can be used to detect variables
 # changed or created by a user, as in function safeEval.
 # They can also be used to check the correctness of
 # a value computed by a user.
@@ -98,14 +98,14 @@ safeEval <- function(expr, e){
 # value of x in the global environment will have changed,
 # but if the expression is evaluated in a clean environment
 # the value of x on the right will be found in the snapshot
-# hence will be the same as that found by the user. 
+# hence will be the same as that found by the user.
 #
 cleanEnv <- function(snapshot){
   # clone of snapshot
   pe <- if(length(snapshot) > 0){
     as.environment(as.list(snapshot))
   } else {
-    new.env()  
+    new.env()
   }
   parent.env(pe) <- globalenv()
   # return new environment whose parent is pe
@@ -124,13 +124,13 @@ loadDependencies <- function(lesson_dir) {
     if(length(packages_as_chars) == 0) return(TRUE)
     swirl_out("Itentando cargar las dependencias de la lección ...")
     for(p in packages_as_chars) {
-      p <- gsub("^\\s+|\\s+$", "", p) # trim leading and trailing whitespace 
+      p <- gsub("^\\s+|\\s+$", "", p) # trim leading and trailing whitespace
       if(suppressPackageStartupMessages(
         suppressWarnings(
           suppressMessages(require(p, character.only=TRUE, quietly=TRUE))))) {
         swirl_out("¡Paquete", sQuote(p), "cargado correctamente!")
       } else {
-        swirl_out("Esta lección requiere el paquete", sQuote(p), 
+        swirl_out("Esta lección requiere el paquete", sQuote(p),
                   "¿Querrías que lo instale por tí ahora?")
         yn <- select.list(choices=c("Sí", "No"), graphics=FALSE)
         if(yn == "Sí") {
@@ -138,8 +138,8 @@ loadDependencies <- function(lesson_dir) {
           install.packages(p, quiet=TRUE)
           if(suppressPackageStartupMessages(
             suppressWarnings(
-              suppressMessages(require(p, 
-                                       character.only=TRUE, 
+              suppressMessages(require(p,
+                                       character.only=TRUE,
                                        quietly=TRUE))))) {
             swirl_out("¡Paquete", sQuote(p), "instalado correctamente!")
           } else {
@@ -170,7 +170,7 @@ complete_part <- function(e) {
       orig_script_name <- row['Script']
       correct_script_name <- paste0(
         tools::file_path_sans_ext(orig_script_name), "-correct.R")
-      correct_script_path <- file.path(e$path, "scripts", 
+      correct_script_path <- file.path(e$path, "scripts",
                                        correct_script_name)
       if(file.exists(correct_script_path)) {
         try(source(correct_script_path))
@@ -182,4 +182,4 @@ complete_part <- function(e) {
   message("Completando la primera parte de la lección por tí ...\n")
   apply(les, 1, exec_cmd)
   invisible()
-} 
+}

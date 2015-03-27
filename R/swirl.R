@@ -266,7 +266,7 @@ resume.default <- function(e, ...){
     targs <- list(...)
     # Check if appropriately named args exist
     if(is.null(targs$test_course) || is.null(targs$test_lesson)) {
-      stop("¡Debes especificar 'test_course' y 'test_lesson' para ejecutar en modo 'test'!")
+      stop("Debes especificar 'test_course' y 'test_lesson' para ejecutar en modo 'test'!")
     } else {
       # Make available for use in menu functions
       e$test_lesson <- targs$test_lesson
@@ -275,7 +275,7 @@ resume.default <- function(e, ...){
     # Check that 'from' is less than 'to' if they are both provided
     if(!is.null(targs$from) && !is.null(targs$to)) {
       if(targs$from >= targs$to) {
-        stop("¡El argumento 'to' estrictamente debe ser mayor al argumento 'from'!")
+        stop("El argumento 'to' estrictamente debe ser mayor al argumento 'from'!")
       }
     }
     if(is.null(targs$from)) {
