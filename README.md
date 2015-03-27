@@ -15,7 +15,8 @@ Para instalar la versión en español de `swirl` debes instalar primero el paque
 ```
 install.packages("devtools")
 ```
-Una vez instalado el paquete `devtools` instala la versión en español de swirl contenida en este repositorio con el siguiente comando:
+
+Los usuarios de Microsoft Windows deberán instalar [Rtools](http://cran.r-project.org/bin/windows/Rtools) antes de poder usar `devtools`. Una vez instalado el paquete `devtools` instala la versión en español de swirl contenida en este repositorio con el siguiente comando:
 
 ```
 devtools::install_github("alcideschaux/swirl-spa")
@@ -30,14 +31,6 @@ Si experimentas problemas instalando `swirl` en español desde este repositorio 
 4. Haz click en `Install`. Eso es todo.
 
 ![Figura 1](Package_targz.png)
-
-Para la correcta instalación de `swirl` en español hace falta que tengas instalado el paquete `bitops`. Si no tienes este paquete (como es el caso habitual para usuarios de Microsoft Windows) debes instalarlo desde CRAN con el siguiente comando:
-
-```
-install.packages("bitops")
-```
-
-El paquete `bitops` debe instalarse antes de instalar `swirl`.
 
 ## Lanzando swirl
 Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
