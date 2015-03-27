@@ -219,7 +219,7 @@ welcome.default <- function(e, ...){
 #
 housekeeping.default <- function(e){
   swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera leccion, cubramos rapidamente algunos puntos de quehaceres domesticos. Antes que nada, deberias saber que cuando veas '...', eso significa que debes presionar Enter cuando termines de leer y estes listo para continuar."))
-  readline("\n...  <-- Esta es tu señal para presionar Enter y continuar")
+  readline("\n...  <-- Esto te indica que presiones Enter para continuar")
   swirl_out("Ademas, cuando veas 'PREGUNTA:', la linea de comandos de R (>), o cuando se te pida que selecciones de una lista, eso significa que es tu turno de ingresar una respuesta, para luego presionar Enter y continuar.")
   select.list(c("Continua.", "Procede.", "Vamos avanzando!"),
               title="\nSelecciona 1, 2, o 3 y presiona Enter", graphics=FALSE)
