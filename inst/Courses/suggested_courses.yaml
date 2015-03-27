@@ -1,3 +1,3 @@
-- Course: Programación en R
-  Description: Fundamentos de la programación en R
-  Install: install_from_github("alcideschaux", "Programacion_en_R")
+- Course: Programacion en R
+  Description: Fundamentos de la programacion en R
+  Install: swirl::install_course_github("alcideschaux", "Programacion_en_R")
