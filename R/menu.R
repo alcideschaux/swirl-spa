@@ -203,7 +203,8 @@ welcome.test <- function(e, ...){
 # Default version.
 welcome.default <- function(e, ...){
   swirl_out("Bienvenido a swirl!")
-  swirl_out("Por favor registrate. Si has usado swirl antes, tipea el mismo nombre que usaste entonces. Si es la primera vez, elige un nombre.", skip_after=TRUE)
+  swirl_out("Por favor registrate. Si has usado swirl antes, tipea el mismo nombre",
+            "que usaste entonces. Si es la primera vez, elige un nombre único.", skip_after=TRUE)
   resp <- readline("Como quieres que te llame? ")
   while(str_detect(resp, '[[:punct:]]')) {
     swirl_out("Por favor no uses comillas u otros tipos de puntuaciones en tu nombre.",
@@ -218,12 +219,23 @@ welcome.default <- function(e, ...){
 # @param e persistent environment used here only for its class attribute
 #
 housekeeping.default <- function(e){
-  swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera leccion, cubramos rapidamente algunos puntos de quehaceres domesticos. Antes que nada, deberias saber que cuando veas '...', eso significa que debes presionar Enter cuando termines de leer y estes listo para continuar."))
+  swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera leccion",
+            "cubramos rapidamente algunos puntos de manejo basico de swirl.",
+            "Antes que nada, deberias saber que cuando veas '...', eso significa",
+            "que debes presionar Enter cuando termines de leer y estes",
+            "listo para continuar."))
   readline("\n...  <-- Esto te indica que presiones Enter para continuar")
-  swirl_out("Ademas, cuando veas 'PREGUNTA:', la linea de comandos de R (>), o cuando se te pida que selecciones de una lista, eso significa que es tu turno de ingresar una respuesta, para luego presionar Enter y continuar.")
+  swirl_out("Ademas, cuando veas 'PREGUNTA:', la linea de comandos de R (>),",
+            "o cuando se te pida que selecciones de una lista, eso significa",
+            "que es tu turno de ingresar una respuesta, para luego presionar",
+            "Enter y continuar.")
   select.list(c("Continua.", "Procede.", "Vamos avanzando!"),
               title="\nSelecciona 1, 2, o 3 y presiona Enter", graphics=FALSE)
-  swirl_out("Puedes salir de swirl y regresar a la linea de comandos de R (>) en cualquier momento presionando la tecla de escape (Esc). Si ya estas en la linea de comandos, tipea bye() para salir y guardar tu progreso. Cuando salgas apropiadamente, veras un mensaje corto haciendote saber que lo has hecho.")
+  swirl_out("Puedes salir de swirl y regresar a la linea de comandos de R (>)",
+            "en cualquier momento presionando la tecla de escape (Esc).",
+            "Si ya estas en la linea de comandos, tipea bye() para salir y",
+            "guardar tu progreso. Cuando salgas apropiadamente, veras un mensaje",
+            "corto haciendote saber que lo has hecho.")
   info()
   swirl_out("Vamos a empezar!", skip_before=FALSE)
   readline("\n...")
@@ -259,7 +271,8 @@ courseMenu.test <- function(e, choices) {
 
 # A stub. Eventually this should be a full menu
 lessonMenu.default <- function(e, choices){
-  swirl_out("Por favor escoge una leccion, o tipea 0 para regresar al menu del curso.")
+  swirl_out("Por favor escoge una leccion, o tipea 0 para regresar al",
+            "menu del curso.")
   return(select.list(choices, graphics=FALSE))
 }
 
