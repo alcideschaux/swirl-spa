@@ -219,10 +219,10 @@ welcome.default <- function(e, ...){
 # @param e persistent environment used here only for its class attribute
 #
 housekeeping.default <- function(e){
-  swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera leccion",
-            "cubramos rapidamente algunos puntos de manejo basico de swirl.",
-            "Antes que nada, deberias saber que cuando veas '...', eso significa",
-            "que debes presionar Enter cuando termines de leer y estes",
+  swirl_out(paste0("Gracias, ", e$usr,". Antes de empezar con nuestra primera leccion ",
+            "cubramos rapidamente algunos puntos de manejo basico de swirl. ",
+            "Antes que nada, deberias saber que cuando veas '...', eso significa ",
+            "que debes presionar Enter cuando termines de leer y estes ",
             "listo para continuar."))
   readline("\n...  <-- Esto te indica que presiones Enter para continuar")
   swirl_out("Ademas, cuando veas 'PREGUNTA:', la linea de comandos de R (>),",
