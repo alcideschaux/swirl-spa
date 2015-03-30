@@ -45,7 +45,7 @@ waitUser.text_order_question <- function(current.row, e){
 
 
 waitUser.video <- function(current.row, e){
-  response <- readline("S/N")
+  response <- readline("S/N ")
   if(tolower(response) %in% c("s", "si")){
     swirl_out("Tipea nxt() para continuar")
     e$prompt <- TRUE
