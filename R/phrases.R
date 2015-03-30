@@ -8,7 +8,7 @@ praise <- function() {
                  "Sigue adelante!",
                  "Vas muy bien!",
                  "Todo el esfuerzo va dando frutos!",
-                 "Le diste!Buen trabajo!",
+                 "Le diste! Buen trabajo!",
                  "Eres el mejor!",
                  "Eres genial!",
                  "Sigue adelante y llegaras a destino!",
