@@ -39,7 +39,7 @@ Una vez finalizada la descarga e instalación del paquete puedes iniciar el prog
 swirl en español puede correr todos los cursos que se encuentran disponibles en el repositorio oficial de swirl en [https://github.com/swirldev/swirl_courses#swirl-courses](https://github.com/swirldev/swirl_courses#swirl-courses). Adicionalmente, se pueden instalar los mismos cursos en español desde el repositorio del Dr. Alcides Chaux en [https://github.com/alcideschaux](https://github.com/alcideschaux). Los cursos en español disponibles son:
 
 * **Programación en R**, disponible en [https://github.com/alcideschaux/Programacion_en_R](https://github.com/alcideschaux/Programacion_en_R).
-* **Introducción a la Estadística** \*
+* **Introducción a la Estadística**, disponible en [https://github.com/alcideschaux/Introduccion_a_la_Estadistica](https://github.com/alcideschaux/Introduccion_a_la_Estadistica).
 * **Análisis de Datos** \*
 * **Estadística Inferencial** \*
 * **Modelos de Regresión** \*
