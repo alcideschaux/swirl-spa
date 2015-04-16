@@ -36,11 +36,11 @@ Si experimentas problemas instalando `swirl` en español desde este repositorio 
 Una vez finalizada la descarga e instalación del paquete puedes iniciar el programa con `swirl()`. Las funciones que controlan el comportamiento de swirl incluyen `bye()` para salir, `main()` para regresar al menú principal, `play()` para permitir la experimentación en la consola de R sin la interfaz de swirl, `nxt()` para reiniciar la interacción con swirl, e `info()` para mostrar un menú de ayuda.
 
 ## Instalando cursos
-swirl en español puede correr todos los cursos que se encuentran disponibles en el repositorio oficial de swirl en [https://github.com/swirldev/swirl_courses#swirl-courses](https://github.com/swirldev/swirl_courses#swirl-courses). Adicionalmente, se pueden instalar los mismos cursos en español desde el repositorio del Dr. Alcides Chaux en [https://github.com/alcideschaux](https://github.com/alcideschaux). Los cursos en español disponibles son:
+swirl en español puede correr todos los cursos que se encuentran disponibles en el repositorio oficial de swirl en [https://github.com/swirldev/swirl_courses#swirl-courses](https://github.com/swirldev/swirl_courses#swirl-courses). Adicionalmente, se pueden instalar cursos en español desde el repositorio del Dr. Alcides Chaux en [https://github.com/alcideschaux](https://github.com/alcideschaux). Los cursos en español disponibles son:
 
 * **Programación en R**, disponible en [https://github.com/alcideschaux/Programacion_en_R](https://github.com/alcideschaux/Programacion_en_R).
 * **Introducción a la Estadística**, disponible en [https://github.com/alcideschaux/Introduccion_a_la_Estadistica](https://github.com/alcideschaux/Introduccion_a_la_Estadistica).
-* **Análisis de Datos** \*
+* **Análisis de Datos**, disponible en [https://github.com/alcideschaux/Analisis_de_Datos](https://github.com/alcideschaux/Analisis_de_Datos).
 * **Estadística Inferencial** \*
 * **Modelos de Regresión** \*
 
