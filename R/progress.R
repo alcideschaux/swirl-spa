@@ -18,7 +18,7 @@ saveProgress.default <- function(e){
 delete_progress <- function(user){
   # Make sure user entered a user name
   if(nchar(user) < 1){
-    stop("Por favor ingresa un nombre de usuario valido.")
+    stop("Por favor ingresa un nombre de usuario válido.")
   }
 
   # Find path to user data

@@ -31,7 +31,7 @@ get_corr_ans.cmd_question <- function(unit) {
 get_corr_ans.mult_question <- function(unit) {
   corr_ans_ind <- grep("^_[1-9][.].+_$", unit)
   if(length(corr_ans_ind) == 0) {
-    stop("Olvidaste especificar la respuesta correcta en un examen de opcion multiple!")
+    stop("Olvidaste especificar la respuesta correcta en una pregunta de opción multiple!")
   }
   gsub("^_[1-9][.]\\s|_$", "", unit[corr_ans_ind])
 }
@@ -195,7 +195,7 @@ get_unit_class <- function(unit) {
                      "mult_question",
                      "video",
                      "figure")
-  if(!cl %in% valid_classes) stop("Unidad de clase invalida usada!")
+  if(!cl %in% valid_classes) stop("Unidad de clase inválida usada!")
   cl
 }
 

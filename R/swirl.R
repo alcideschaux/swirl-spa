@@ -239,11 +239,12 @@ main <- function(){invisible()}
 #' | Leaving swirl now. Type swirl() to resume.
 #' }
 info <- function(){
-  swirl_out("Cuando estes en la linea de comandos de R (>):")
-  swirl_out("-- Tipear play() te deja experimentar con R por tu cuenta; swirl ignorara lo que hagas ...", skip_before=FALSE)
-  swirl_out("-- HASTA QUE tipees nxt() con lo que swirl prestara otra vez atencion.", skip_before=FALSE)
-  swirl_out("-- Tipear bye() hace que salgas de swirl. Se guardara tu progreso.", skip_before=FALSE)
-  swirl_out("-- Tipear main() te regresa al menu principal de swirl.", skip_before=FALSE)
+  swirl_out("Cuando estes en la línea de comandos de R (>):")
+  swirl_out("-- Tipear skip() te permite saltar la pregunta actual.", skip_before=FALSE)
+  swirl_out("-- Tipear play() te deja experimentar con R por tu cuenta; swirl ignorará lo que hagas ...", skip_before=FALSE)
+  swirl_out("-- HASTA QUE tipees nxt() con lo que swirl prestará otra vez atención.", skip_before=FALSE)
+  swirl_out("-- Tipear bye() hace que salgas de swirl. Se guardará tu progreso.", skip_before=FALSE)
+  swirl_out("-- Tipear main() te regresa al menú principal de swirl.", skip_before=FALSE)
   swirl_out("-- Tipear info() muestra estas opciones otra vez.", skip_before=FALSE, skip_after=TRUE)
   invisible()
 }
@@ -275,7 +276,7 @@ resume.default <- function(e, ...){
     # Check that 'from' is less than 'to' if they are both provided
     if(!is.null(targs$from) && !is.null(targs$to)) {
       if(targs$from >= targs$to) {
-        stop("El argumento 'to' estrictamente debe ser mayor al argumento 'from'!")
+        stop("El argumento 'to' debe necesariamente ser mayor al argumento 'from'!")
       }
     }
     if(is.null(targs$from)) {
@@ -303,7 +304,7 @@ resume.default <- function(e, ...){
     #  their "official" values, in case the user has changed them
     #  while playing.
     if(length(e$snapshot)>0)xfer(as.environment(e$snapshot), globalenv())
-    swirl_out("Reiniciando leccion ...")
+    swirl_out("Reiniciando lección ...")
     e$playing <- FALSE
     e$iptr <- 1
   }
@@ -313,7 +314,7 @@ resume.default <- function(e, ...){
     e$playing <- FALSE
     e$reset <- TRUE
     e$iptr <- 2
-    swirl_out("He reseteado el script a su estado original. Si no se actualizada inmediatamente, puede que necesites hacer click sobre el mismo.",
+    swirl_out("He reseteado el script a su estado original. Si no se actualiza inmediatamente, puede que necesites hacer click sobre el mismo.",
               skip_after = TRUE)
   }
 
@@ -329,7 +330,7 @@ resume.default <- function(e, ...){
   }
 
   if(uses_func("play")(e$expr)[[1]]){
-    swirl_out("Entrando al modo juego. Experimenta como se te plazca, luego tipea nxt() cuando estes listo para reiniciar la leccion.", skip_after=TRUE)
+    swirl_out("Entrando al modo juego. Experimenta todo lo que quieras. Tipea nxt() cuando quieras reiniciar la lección.", skip_after=TRUE)
     e$playing <- TRUE
   }
 
@@ -354,7 +355,7 @@ resume.default <- function(e, ...){
         # Source the correct script
         try(source(correct_script_path))
         # Inform the user and open the correct script
-        swirl_out("Acabo de hacer fuente el siguiente script, que demuestra una posible solucion.",
+        swirl_out("Acabo de hacer fuente el siguiente script, mostrando una posible solución.",
                   skip_after=TRUE)
         file.edit(correct_script_path)
         readline("Presiona Enter cuando estes listo para continuar ...")
@@ -400,7 +401,7 @@ resume.default <- function(e, ...){
 
   # If the user want to return to the main menu, do the bookkeeping
   if(uses_func("main")(e$expr)[[1]]){
-    swirl_out("Regresando al menu principal ...")
+    swirl_out("Regresando al menú principal ...")
     # Remove the current lesson. Progress has been saved already.
     if(exists("les", e, inherits=FALSE)){
       rm("les", envir=e, inherits=FALSE)
@@ -454,7 +455,7 @@ resume.default <- function(e, ...){
     if(e$row > min(nrow(e$les), e$test_to)) {
       # If in test mode, we don't want to run another lesson
       if(is(e, "test")) {
-        swirl_out("Leccion completa! Saliendo de swirl ahora ...",
+        swirl_out("Lección completa! Saliendo de swirl ahora ...",
                   skip_after=TRUE)
         esc_flag <- FALSE # to supress double notification
         return(FALSE)
@@ -479,7 +480,7 @@ resume.default <- function(e, ...){
       if(exists("skips", e)) e$skips <- 0
       clearCustomTests()
       # Let user know lesson is complete
-      swirl_out("Has llegado al final de esta leccion! Regresando al menu principal ...")
+      swirl_out("Has llegado al final de esta lección! Regresando al menú principal ...")
       # let the user select another course lesson
       temp <- mainMenu(e)
       # if menu returns FALSE, user wants to quit.

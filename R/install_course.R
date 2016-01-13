@@ -71,7 +71,7 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
     stop("El argumento 'dev' debe ser o TRUE o FALSE!")
   }
   if(!(mirror == "github" || mirror == "bitbucket")){
-    stop("Por favor ingresa un nombre valido para un espejo. ('github' o 'bitbucket')")
+    stop("Por favor ingresa un nombre válido para una réplica. ('github' o 'bitbucket')")
   }
 
   # make pathname from course_name
@@ -127,7 +127,7 @@ install_from_swirl <- function(course_name, dev = FALSE, mirror = "github"){
             recursive=TRUE)){
     swirl_out("El Curso se ha instalado existosamente!", skip_after=TRUE)
   } else {
-    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
 
   # Delete unzipped directory
@@ -179,7 +179,7 @@ zip_course <- function(path, dest=NULL){
   if(file.copy(path, zip_dir, recursive=TRUE)){
     swirl_out("El directorio del Curso ha sido existosamente comprimido!", skip_after=TRUE)
   } else {
-    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
 
   # Change directory to folder to be zipped
@@ -215,7 +215,7 @@ uninstall_course <- function(course_name){
     unlink(path, recursive=TRUE, force=TRUE)
     message("El Curso se ha desinstalado exitosamente!")
   } else {
-    stop("No se encontro el Curso!")
+    stop("No se encontró el Curso!")
   }
   invisible()
 }
@@ -295,7 +295,7 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
                    nomatch=-1)
       nomatch <- match_ind < 0
       if(any(nomatch)) {
-        stop("El Curso ", sQuote(which_course[nomatch][1]), " no se encuentra en el directorio especificado. Ten cuidado, los nombres de cursos son sensibles a mayusculas!")
+        stop("El Curso ", sQuote(which_course[nomatch][1]), " no se encuentra en el directorio especificado. Ten cuidado, los nombres de cursos son sensibles a mayúsculas!")
       }
       dirs_to_copy <- dirs_to_copy[match_ind]
     }
@@ -303,7 +303,7 @@ install_course_zip <- function(path, multi=FALSE, which_course=NULL){
                                       "Courses"), recursive=TRUE)){
       swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
     } else {
-      swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
+      swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
     }
 
     # Delete unzipped directory
@@ -349,7 +349,7 @@ install_course_directory <- function(path){
             recursive=TRUE)){
     swirl_out("Curso instalado exitosamente!", skip_after=TRUE)
   } else {
-    swirl_out("La instalacion del Curso ha fallado.", skip_after=TRUE)
+    swirl_out("La instalación del Curso ha fallado.", skip_after=TRUE)
   }
 
   invisible()

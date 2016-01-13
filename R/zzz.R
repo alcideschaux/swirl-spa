@@ -6,11 +6,11 @@
       "vacies antes de empezar swirl.", skip_after=TRUE),
       make_pretty("Tipea ls() para ver una lista de las variables en tu espacio",
       "de trabajo. Luego, tipea rm(list=ls()) para limpiarlo.", skip_after=TRUE),
-      make_pretty("Tipea swirl() cuando estes listo para empezar.", skip_after=TRUE)
+      make_pretty("Tipea swirl() cuando estés listo para empezar.", skip_after=TRUE)
     )
   } else {
     packageStartupMessage(
-      make_pretty("Hola! Tipea swirl() cuando estes listo para empezar.",
+      make_pretty("Hola! Tipea swirl() cuando estés listo para empezar.",
                   skip_after=TRUE)
     )
   }

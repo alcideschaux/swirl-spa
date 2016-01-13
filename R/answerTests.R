@@ -164,7 +164,7 @@ runTest.newcmd <- function(keyphrase,e){
     return(TRUE)
   } else
     if (ansResults$passed && !callResults$passed){
-      swirl_out("Esa no es la expresion que estaba esperando pero funciona.")
+      swirl_out("Esa no es la expresión que estaba esperando pero funciona.")
       swirl_out(callResults$message)
       #todo
       #following line is temporary fix to create correct vars for future ques if needed
@@ -184,7 +184,7 @@ runTest.swirl1cmd <- function(keyphrase,e){
     return(TRUE)
   } else
     if (ans.is.correct && !call.is.correct){
-     swirl_out("Esa no es la expresion que estaba esperando pero funciona.")
+     swirl_out("Esa no es la expresión que estaba esperando pero funciona.")
       #following line is temporary fix to create correct vars for future ques if needed
       eval(correct.expr,globalenv())
       return(TRUE)
@@ -326,7 +326,7 @@ runTest.in_range <- function(keyphrase, e){
   range <- try(eval(parse(text=paste0("c(", rightside(keyphrase), ")"))),
                silent=TRUE)
   if(!is.numeric(range)){
-    swirl_out(paste("El rango dado", rightside(keyphrase), "no es numerico."))
+    swirl_out(paste("El rango dado", rightside(keyphrase), "no es numérico."))
     return(FALSE)
   }
   results <- expectThat(e$var,

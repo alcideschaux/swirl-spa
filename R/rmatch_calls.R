@@ -79,8 +79,8 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
   # would be likely to give a misleading result. Catch the error merely to
   # produce a better diagnostic.
   tryCatch(fct <- match.fun(expr[[1]]),
-           error=function(e)stop(paste0("Expresion ilegal ", dprs(expr),
-                                        ": ", dprs(expr[[1]]), " no es una funcion.\n")))
+           error=function(e)stop(paste0("Expresión ilegal ", dprs(expr),
+                                        ": ", dprs(expr[[1]]), " no es una función.\n")))
   # If fct is a special function such as `$`, or builtin such as `+`, return expr.
   if(is.primitive(fct)){
     return(expr)
@@ -88,18 +88,18 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
   # If fct is an (S4) standardGeneric, match.call is likely to give a misleading result,
   # so raise an exception. (Note that builtins were handled earlier.)
   if(is(fct, "standardGeneric")){
-    stop(paste0("Expresion ilegal, ", dprs(expr), ": ", dprs(expr[[1]]), " es un standardGeneric.\n"))
+    stop(paste0("Expresión ilegal, ", dprs(expr), ": ", dprs(expr[[1]]), " es un standardGeneric.\n"))
   }
   # At this point, fct should be an ordinary function or an S3 method.
   if(isS3(fct)){
     # If the S3 method's first argument, expr[[2]], is anything but atomic
     # its class can't be determined here without evaluation.
     if(!is.atomic(expr[[2]]) & !eval_for_class){
-      stop(paste0("Expresion ilegal, ", dprs(expr),": El primer argumento, ", dprs(expr[[2]]),
-                  ", al metodo S3 '", dprs(expr[[1]]),
-                  "', es una ", class(expr[[2]]) , ", la cual (como una expresion) no es atomica,",
-                  " por lo tanto su clase no puede ser determinada en un arbol",
-                  " sumario de sintaxis sin contar con informacion adicional.\n"))
+      stop(paste0("Expresión ilegal, ", dprs(expr),": El primer argumento, ", dprs(expr[[2]]),
+                  ", al método S3 '", dprs(expr[[1]]),
+                  "', es una ", class(expr[[2]]) , ", la cual (como una expresión) no es atómica,",
+                  " por lo tanto su clase no puede ser determinada en un árbol",
+                  " sumario de sintaxis sin contar con información adicional.\n"))
     }
     # Otherwise, attempt to find the appropriate method.
     if(is.null(eval_env)){
@@ -117,16 +117,16 @@ rmatch_calls <- function(expr, eval_for_class=FALSE, eval_env=NULL){
     # raise an error
     if(is(err, "try-error")){
       tryCatch(fct <- getS3method(as.character(expr[[1]]), "default"),
-               error = function(e)stop(paste0("Expresion ilegal ", dprs(expr), ": ",
-                                              "No existe un metodo S3 emparejado o por defecto para el objecto, ",
+               error = function(e)stop(paste0("Expresión ilegal ", dprs(expr), ": ",
+                                              "No existe un método S3 emparejado o por defecto para el objecto, ",
                                               dprs(expr[[2]]), ", de clase, ", cls,".\n")))
     }
   }
   # Form preliminary match. If match.call raises an error here, the remaining code is
   # likely to give a misleading result. Catch the error merely to give a better diagnostic.
   tryCatch(expr <- match.call(fct, expr),
-           error = function(e)stop(paste0("Expresion ilegal ", dprs(expr), ": ",
-                                          dprs(expr[[1]]), " no es una funcion.\n")))
+           error = function(e)stop(paste0("Expresión ilegal ", dprs(expr), ": ",
+                                          dprs(expr[[1]]), " no es una función.\n")))
   # Append named formals with default values which are not included
   # in the preliminary match
   fmls <- formals(fct)

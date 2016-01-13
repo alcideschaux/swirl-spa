@@ -180,7 +180,7 @@ testResponse.default <- function(current.row, e){
     if(length(e$snapshot)>0)xfer(as.environment(e$snapshot), globalenv())
     mes <- tryAgain()
     if(is(current.row, "cmd_question")) {
-      mes <- paste(mes, "O tipea info() para mas opciones.")
+      mes <- paste(mes, "O tipea info() para más opciones.")
     }
     swirl_out(mes)
     temp <- current.row[,"Hint"]

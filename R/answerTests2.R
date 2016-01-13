@@ -225,8 +225,8 @@ omnitest <- function(correctExpr=NULL, correctVal=NULL, strict=FALSE, eval_for_c
   if((isTRUE(valGood) || is.na(valGood)) && exprGood){
     return(TRUE)
   } else if (isTRUE(valGood) && !exprGood && !strict){
-      swirl_out("Esa no es la expresion que esperaba pero funciona.")
-      swirl_out("He ejecutado la expresion correcta en el caso de que el resultado sea requerido para una pregunta subsiguiente.")
+      swirl_out("Esa no es la expresión que esperaba pero funciona.")
+      swirl_out("He ejecutado la expresión correcta en el caso de que el resultado sea requerido para una pregunta subsiguiente.")
       eval(parse(text=correctExpr),globalenv())
       return(TRUE)
     } else {
